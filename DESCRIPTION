@@ -2,11 +2,11 @@ Package: umdpsyc
 Title: UMD PSYC R Learning Package
 Version: 0.0.0.9000
 Authors@R:
-    person(given = "Brian",
+    c(person(given = "Brian",
            family = "Kim",
            role = c("aut", "cre"),
            email = "kimbrian@umd.edu",
-           comment = c(ORCID = "0000-0002-2278-2432"))
+           comment = c(ORCID = "0000-0002-2278-2432")))
 Description: What the package does (one paragraph).
 License: What license it uses
 Encoding: UTF-8
