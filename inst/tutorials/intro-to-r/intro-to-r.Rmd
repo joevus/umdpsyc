@@ -1,0 +1,120 @@
+---
+title: "Introduction to R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+tutorial:
+  id: "intro-r"
+  version: 0.5
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(submitr)
+library(basket)
+knitr::opts_chunk$set(echo = FALSE)
+learnr::tutorial_options(
+  exercise.timelimit = 60, 
+  exercise.checker = submitr::null_code_checker)
+```
+
+```{r}
+submitr::login_controls()
+```
+
+```{r context="server", echo = FALSE}
+options(tutorial.storage = "none") # for learnr
+vfun <- submitr::make_basic_validator('credentials-example.csv', "hello") #basket::check_valid
+#storage_actions <- 
+#  record_gs4(
+#    key = "1VDhHFhe_ripLCLaMvdhWG1SLQJDZNfR4lA1L7nqmsZY",
+#    email = "umd.psyc200.submission@gmail.com",
+#    vfun
+#  )
+storage_actions <- submitr::record_local("./minimal_submissions.csv")
+submitr::shiny_logic(input, output, session, vfun,
+                     storage_actions)
+```
+
+As psychologists, we use statistics to answer our research questions. We use statistical programs so that we do not have to compute statistics on large datasets by hand! 
+
+In this module, you will learn how to use the programming language, R, to analyze data. While there are many programs we could use, R has a few advantages: 
+
+- FREE! (other statistical programs can cost thousands of dollars!)
+- R Open source, so we can see the code. This contributes to Open Science (which is a good thing)
+- It also means that researchers contribute coding packages, so it's easy to calculate many types of statistics and know exactly what you're doing
+- **Really** good graphs
+- Easy to reuse code (save time) and share (transparency in research)
+
+### Four Windows 
+
+- Top Left: R Markdown File: This is where you will answer questions and write code for R assignments. Anything you write in this Top Left window will save when you exit out of R 
+- Bottom Left: Console: This is a little like scrap paper. You can use this to try to answer questions or to write code, but anything written in this area will **NOT** save. This means we won't be able to grade anything written in this section! 
+- Top Right: Environment (and some other things): The top right section will be blank for now, but any variable you make or any data set you upload will be saved here.
+- Bottom Right: Everything else: There are several tabs you can open in this section. If you make graphs, you will be able to see them here(on the "Plots" Tab. Additionally, the "Help" tab will give you more information about the functions we will use in R 
+
+### The R Markdown File 
+R Markdown Files are great because we can both type regular text and include areas that we will code in. 
+- To write non-code, you don't have to do anything special, just write! 
+- When writing code, you need to create a coding area (R refers to these as **code chunks**)
+- To add a code chunk, click "Code" in the top tool bar and select "Insert Chunk." This will create a code chunk like this:
+
+How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by selection "Run" in the tool bar underneath our R Markdown File name. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
+
+Try running the following calculation examples
+```{r}
+# Addition
+2+4
+
+# Subtraction
+13-2
+
+# Multiplication
+7*4
+
+# Division
+100/20
+```
+
+## Packages
+
+```{r}
+library(openintro)
+```
+
+
+## Functions
+
+Much of what you do in R will involve using **functions**. Let's take a look at a simple function.
+
+```{r}
+print('Hello')
+```
+
+Here, we are calling a function called `print`. This function takes in one argument, or input: `'Hello'`. The arguments go inside parentheses, and provide the input values. The function then takes that input and performs some sort of action. In this case, as you might have guessed, the `print` function prints out whatever is provided as input. 
+
+Let's try a different function.
+
+```{r}
+sum(1,2)
+```
+
+THis function, `sum`, takes in two arguments. As you might be able to deduce, `sum` takes the sum of the two numbers. Notice that we could have just as easily used `1+2` instead of using the `sum` function. Though it didn't make a difference here, there are cases when we might prefer to use the `sum` function. For example, when you want to take the sum of a lot of numbers, it might be easier to use sum than having to type out a lot of `+` symbols. 
+
+
+
+```{r function}
+learnr::question("Which of these is the correct way to call the `print` function?",
+         answer("print 'some text here'", correct=FALSE),
+         answer("print('some text here')", correct = TRUE,  message = "Good job!"),
+         answer("print(some text here)",  correct = FALSE),
+         allow_retry = TRUE,
+         random_answer_order = TRUE
+)
+```
+
+## Code
+
+```{r code_sandbox, exercise=TRUE, exercise.cap="Sandbox"}
+
+```
