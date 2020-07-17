@@ -1,7 +1,7 @@
-Package: umdpsyc200
-Title: Learning R for PSYC 200
+Package: umdpsy
+Title: Learning R for UMD PSYC
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "Brian",
            family = "Kim",
            role = c("aut", "cre"),
