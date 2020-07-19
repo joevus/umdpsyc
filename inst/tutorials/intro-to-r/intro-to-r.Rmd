@@ -10,31 +10,12 @@ tutorial:
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(submitr)
-library(basket)
 knitr::opts_chunk$set(echo = FALSE)
 learnr::tutorial_options(
-  exercise.timelimit = 60, 
-  exercise.checker = submitr::null_code_checker)
+  exercise.timelimit = 60)
 ```
 
-```{r}
-submitr::login_controls()
-```
-
-```{r context="server", echo = FALSE}
-options(tutorial.storage = "none") # for learnr
-vfun <- submitr::make_basic_validator('credentials-example.csv', "hello") #basket::check_valid
-#storage_actions <- 
-#  record_gs4(
-#    key = "1VDhHFhe_ripLCLaMvdhWG1SLQJDZNfR4lA1L7nqmsZY",
-#    email = "umd.psyc200.submission@gmail.com",
-#    vfun
-#  )
-storage_actions <- submitr::record_local("./minimal_submissions.csv")
-submitr::shiny_logic(input, output, session, vfun,
-                     storage_actions)
-```
+## Introduction to R
 
 As psychologists, we use statistics to answer our research questions. We use statistical programs so that we do not have to compute statistics on large datasets by hand! 
 
@@ -62,7 +43,7 @@ R Markdown Files are great because we can both type regular text and include are
 How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by selection "Run" in the tool bar underneath our R Markdown File name. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
 
 Try running the following calculation examples
-```{r}
+```{r, echo = TRUE}
 # Addition
 2+4
 
@@ -76,35 +57,28 @@ Try running the following calculation examples
 100/20
 ```
 
-## Packages
+Try doing some arithmetic on your own in the box below. You can run the code by clicking on the blue "Run Code" button at the top right of the box below. 
 
-```{r}
-library(openintro)
+```{r code_sandbox, exercise=TRUE, exercise.cap="Arithmetic"}
+
 ```
-
 
 ## Functions
 
 Much of what you do in R will involve using **functions**. Let's take a look at a simple function.
 
-```{r}
+```{r, echo=TRUE}
 print('Hello')
 ```
 
 Here, we are calling a function called `print`. This function takes in one argument, or input: `'Hello'`. The arguments go inside parentheses, and provide the input values. The function then takes that input and performs some sort of action. In this case, as you might have guessed, the `print` function prints out whatever is provided as input. 
 
-Let's try a different function.
+### Data Types
 
-```{r}
-sum(1,2)
-```
-
-THis function, `sum`, takes in two arguments. As you might be able to deduce, `sum` takes the sum of the two numbers. Notice that we could have just as easily used `1+2` instead of using the `sum` function. Though it didn't make a difference here, there are cases when we might prefer to use the `sum` function. For example, when you want to take the sum of a lot of numbers, it might be easier to use sum than having to type out a lot of `+` symbols. 
-
-
+Notice that the text we wanted to print is in quotation marks. This is because we want to create what is called a **string** object. In R, it is also called a **character** object. These are objects that represents **words**, as opposed to **numeric** objects which represent **numbers**. Essentially, the quotation marks tell R to treat whatever is inside as a **character value**.
 
 ```{r function}
-learnr::question("Which of these is the correct way to call the `print` function?",
+learnr::question("Which of these is the correct way to call the `print` function to print the words 'some text here'?",
          answer("print 'some text here'", correct=FALSE),
          answer("print('some text here')", correct = TRUE,  message = "Good job!"),
          answer("print(some text here)",  correct = FALSE),
@@ -113,8 +87,20 @@ learnr::question("Which of these is the correct way to call the `print` function
 )
 ```
 
-## Code
+Let's look at a different function.
 
-```{r code_sandbox, exercise=TRUE, exercise.cap="Sandbox"}
+```{r, echo = TRUE}
+sum(1,2)
+```
 
+THis function, `sum`, takes in two arguments. As you might be able to deduce, `sum` takes the sum of the two numbers. Notice that we could have just as easily used `1+2` instead of using the `sum` function. Though it didn't make a difference here, there are cases when we might prefer to use the `sum` function. For example, when you want to take the sum of a lot of numbers, it might be easier to use sum than having to type out a lot of `+` symbols. 
+
+Notice that we used `1` and `2` without quotation marks. This is because we wanted to add up **numeric** values rather than **character** values (because it doesn't make sense to add characters together). 
+
+## Packages
+
+Many times, we want to use functions that other people have created and made available. We can do this easily using packages.
+
+```{r, echo=TRUE}
+library(openintro)
 ```

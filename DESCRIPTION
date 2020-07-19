@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "kimbrian@umd.edu",
            comment = c(ORCID = "0000-0002-2278-2432")))
-Description: What the package does (one paragraph).
+Description: A package containing tutorials to be used in teaching R for University of Maryland PSYC classes. 
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
+Imports:
+    learnr
