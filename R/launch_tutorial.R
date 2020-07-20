@@ -2,7 +2,8 @@
 #' 
 #' This function is used to launch tutorials. 
 #'
-#' @param tutorial character, representing the name of a tutorial to run. Options include:
+#' @param tutorial character, representing the name of a tutorial to run. Options include: 
+#' 
 #' 1) 'intro-to-r': A basic introduction to how to use R.
 #'
 #' @return None.
