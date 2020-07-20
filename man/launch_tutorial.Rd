@@ -8,7 +8,10 @@ launch_tutorial(tutorial)
 }
 \arguments{
 \item{tutorial}{character, representing the name of a tutorial to run. Options include:
-1) 'intro-to-r': A basic introduction to how to use R.}
+\enumerate{
+\item 'intro-to-r': A basic introduction to how to use R.
+\item 't-tests': An introduction to doing t-tests in R.
+}}
 }
 \value{
 None.
