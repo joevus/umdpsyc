@@ -12,8 +12,8 @@ License: What license it uses
 Encoding: UTF-8
 LazyData: true
 Imports:
-    learnr (>= 0.10)
-    gradethis (>= 0.10)
+  learnr
+  gradethis
 Remotes:
-    rstudio-education/gradethis
+  rstudio-education/gradethis
 RoxygenNote: 7.1.1
