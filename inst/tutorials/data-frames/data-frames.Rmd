@@ -1,0 +1,128 @@
+---
+title: "Working with Data Frames"
+output: 
+  learnr::tutorial:
+    progressive: true
+runtime: shiny_prerendered
+tutorial:
+  id: "data-frames"
+  version: 0.5
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+learnr::tutorial_options(
+  exercise.timelimit = 60)
+
+```
+
+## Data Frames
+
+In R, the datasets that you will work with will mainly be in **data frames**. Data frames are just a type of object in R that consists of rows and columns of data, just like you might see in an Excel spreadsheet.
+
+```{r}
+data("mtcars")
+```
+
+In this tutorial, we will explore a variety of different functions for working with data frames to explore and analyze data. 
+
+## Displaying Data
+
+If we want to look at the structure of the `email` data frame, we can use `str()`.
+
+```{r structure, echo = TRUE, exercise = TRUE}
+str(mtcars)
+```
+
+This can help you determine types of variables, but be careful! Just because a variable has numbers doesn't mean it's a numerical variable!
+
+We can check the number of rows and columns with the following commands:
+
+```{r, echo = TRUE}
+nrow(mtcars) # this is for the number of rows
+ncol(mtcars) # this is for the number of columns
+dim(mtcars) # this is for the dimensions (rows, columns)
+```
+
+### Accessing Values in a Data Frame object
+
+We can access individual values as well as specific rows and columns in the data frame using square brackets. 
+
+```{r, echo = TRUE}
+mtcars[2,3] # this gets the third variable of the second observation
+```
+
+```{r accessing_values, exercise = TRUE}
+
+```
+
+
+To look at individual columns, we can either leave the rows section blank or we can use "`$`" notation. Note that these are vectors in R.
+
+```{r, echo = TRUE}
+# All of these do the same thing
+mtcars$mpg
+mtcars[,1]
+mtcars[,"mpg"]
+```
+
+If you want to look at multiple columns, we can do that by including a vector of numbers (representing column number) or a vector of column names. We can look at multiple rows by including a vector of rows, representing row numbers, as well.
+
+```{r, echo = TRUE}
+mtcars[1:10, 2:4] # For columns 2 to 4
+mtcars[1:10, c("cyl","disp","hp")] # This does the same thing
+```
+
+
+## Creating Subsets of the Data
+
+Many times, especially with larger datasets, you'll want to only look at certain portions of the data. We can subset our dataset by indicating which rows we want. We do this using a vector of boolean values with `TRUE` whenever it's a row that we want and `FALSE` whenever it's a row we don't want. This vector should have a length equal to the number of rows in the data frame. To get this vector, we can just use a logical operator. For example, consider the following code.
+
+```{r, echo = TRUE}
+mtcars$vs == 0 
+```
+
+This evaluates every element of the `mtcars$vs` vector and returns a vector of the same length with `TRUE` and `FALSE` values. We can then use this vector to subset the dataset so that we only have the rows with `TRUE` values.
+
+```{r, echo = TRUE}
+notvshaped <- mtcars[mtcars$vs == 0,]
+head(notvshaped)
+```
+
+The new object we've created, `notvshaped`, is a data frame that contains only the rows from `mtcars` with a value of 0 in `vs`. We can also use other logical operators to create different subsets. 
+
+```{r, echo = TRUE}
+# What do you think this subset is?
+example_subset <- mtcars[mtcars$vs  == 0 & mtcars$mpg < 20,]
+head(example_subset)
+```
+
+The following table shows a list of some logical operators you might find useful.
+
+|Operator|Meaning|
+|---|---|---|---|
+|>|greater than|
+| >= | greater than or equal to |
+|<|less than|
+| <= | less than or equal to |
+| == | equal to |
+| != | not equal to |
+| & | and |
+| \| | or |
+
+
+## Submitting work
+
+```{r submission-setup}
+submission_code <- function(UID, exercise = 'data-frames'){
+  print(UID * 21314 / 21114)
+}
+```
+
+
+```{r submission, exercise = TRUE}
+submission_code(UID = )
+```

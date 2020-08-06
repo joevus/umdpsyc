@@ -1,8 +1,6 @@
 ---
 title: "Introduction to R"
-output: 
-  learnr::tutorial:
-    progressive: true
+output: learnr::tutorial
 runtime: shiny_prerendered
 tutorial:
   id: "intro-r"
@@ -108,11 +106,7 @@ Many times, we want to use functions that other people have created and made ava
 library(openintro)
 ```
 
-## Exercises 
-
-### Arithmetic
-
-What is the value of $4 * (21 + 5 * 4)^2$?
+## Completing the Tutorial
 
 ```{r grade_result, exercise = TRUE}
 
@@ -122,22 +116,4 @@ What is the value of $4 * (21 + 5 * 4)^2$?
 grade_result(
   pass_if()
 )
-```
-
-### Using functions
-
-Use the `print` function to print out the words `I've completed the tutorial!`.
-
-```{r functions-exercise, exercise = TRUE}
-
-```
-
-### Submitting work
-
-```{r submission, exercise = TRUE}
-UID =  
-```
-
-```{r submission-check}
-print(UID)
 ```

@@ -4,21 +4,21 @@ output:
   learnr::tutorial:
     progressive: true
 runtime: shiny_prerendered
+
 tutorial:
-  id: "intro-r"
+  id: "descriptive-statistics"
   version: 0.5
 ---
 
 
 ```{r setup, include=FALSE}
+library(ggplot2)
 library(learnr)
-library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
-learnr::tutorial_options(
-  exercise.timelimit = 60)
+# learnr::tutorial_options(exercise.timelimit = 60)
 ```
 
-## Introduction to R
+## Introduction to R 
 
 As psychologists, we use statistics to answer our research questions. We use statistical programs so that we do not have to compute statistics on large datasets by hand! 
 
@@ -45,20 +45,28 @@ R Markdown Files are great because we can both type regular text and include are
 
 How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by selection "Run" in the tool bar underneath our R Markdown File name. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
 
-Try running the following calculation examples
-```{r, echo = TRUE}
+Try running the following calculation examples. All you need to do is hit the "Run Code" button.
+```{r arithmetic1, exercise=TRUE}
 # Addition
 2+4
+```
 
+```{r arithmetic2, exercise=TRUE}
 # Subtraction
 13-2
+```
 
+```{r arithmetic3, exercise=TRUE}
 # Multiplication
 7*4
+```
 
+```{r arithmetic4, exercise=TRUE}
 # Division
 100/20
 ```
+
+###
 
 Try doing some arithmetic on your own in the box below. You can run the code by clicking on the blue "Run Code" button at the top right of the box below. 
 
@@ -66,7 +74,14 @@ Try doing some arithmetic on your own in the box below. You can run the code by 
 
 ```
 
-## Functions
+
+### Another example to work on 
+
+```{r code_sandbox2, exercise=TRUE, exercise.cap="Arithmetic"}
+
+```
+
+## Functions 
 
 Much of what you do in R will involve using **functions**. Let's take a look at a simple function.
 
@@ -100,7 +115,7 @@ THis function, `sum`, takes in two arguments. As you might be able to deduce, `s
 
 Notice that we used `1` and `2` without quotation marks. This is because we wanted to add up **numeric** values rather than **character** values (because it doesn't make sense to add characters together). 
 
-## Packages
+## Packages 
 
 Many times, we want to use functions that other people have created and made available. We can do this easily using packages.
 
@@ -108,36 +123,17 @@ Many times, we want to use functions that other people have created and made ava
 library(openintro)
 ```
 
-## Exercises 
+## Completing the Tutorial
 
-### Arithmetic
-
-What is the value of $4 * (21 + 5 * 4)^2$?
-
-```{r grade_result, exercise = TRUE}
-
+```{r test, exercise=TRUE, exercise.cap="UID"}
+qplot(1:10)
 ```
 
-```{r grade_result-check}
-grade_result(
-  pass_if()
-)
-```
+## Another Completing the Tutorial
 
-### Using functions
+Write your UID below and hit submit.
 
-Use the `print` function to print out the words `I've completed the tutorial!`.
 
-```{r functions-exercise, exercise = TRUE}
-
-```
-
-### Submitting work
-
-```{r submission, exercise = TRUE}
-UID =  
-```
-
-```{r submission-check}
-print(UID)
+```{r UID, exercise=TRUE, exercise.cap="UID"}
+qplot(1:10)
 ```
