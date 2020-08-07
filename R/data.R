@@ -1,4 +1,4 @@
-#' Production and farm value of maple products in Canada
+#' Exam scores and sleep
 #'
 #' @source Generated based on published results from various studies.
 #' @format A data frame with columns:

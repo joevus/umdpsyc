@@ -13,7 +13,9 @@ tutorial:
 ```{r setup, include=FALSE}
 library(learnr)
 library(gradethis)
+library(umdpsyc)
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)
 learnr::tutorial_options(
   exercise.timelimit = 60)
 
@@ -39,6 +41,8 @@ str(mtcars)
 
 This can help you determine types of variables, but be careful! Just because a variable has numbers doesn't mean it's a numerical variable!
 
+### Checking the Size
+
 We can check the number of rows and columns with the following commands:
 
 ```{r, echo = TRUE}
@@ -47,9 +51,17 @@ ncol(mtcars) # this is for the number of columns
 dim(mtcars) # this is for the dimensions (rows, columns)
 ```
 
-### Accessing Values in a Data Frame object
+### Accessing Values in a Data Frame 
 
-We can access individual values as well as specific rows and columns in the data frame using square brackets. 
+Many times, we don't actually want to look at the entire dataset, usually because it's quite large and we can't get any useful information out of it. However, we might still want to look at few rows, or observations, to get an idea of what it looks like. We can do this using the `head` function.
+
+```{r}
+head(mtcars)
+```
+
+The `head` function prints out the first few rows of the dataset. This is often used along with `str` to get a quick look at the data. It gives you an idea of what columns there are, as well as an example of the types of values those variables can take. 
+
+If we want to access individual values or specific rows and columns in the data frame, we can do this using square brackets. 
 
 ```{r, echo = TRUE}
 mtcars[2,3] # this gets the third variable of the second observation
@@ -59,6 +71,7 @@ mtcars[2,3] # this gets the third variable of the second observation
 
 ```
 
+### Accessing Columns
 
 To look at individual columns, we can either leave the rows section blank or we can use "`$`" notation. Note that these are vectors in R.
 
@@ -68,6 +81,8 @@ mtcars$mpg
 mtcars[,1]
 mtcars[,"mpg"]
 ```
+
+### Accessing Multiple Columns
 
 If you want to look at multiple columns, we can do that by including a vector of numbers (representing column number) or a vector of column names. We can look at multiple rows by including a vector of rows, representing row numbers, as well.
 
@@ -100,6 +115,16 @@ example_subset <- mtcars[mtcars$vs  == 0 & mtcars$mpg < 20,]
 head(example_subset)
 ```
 
+```{r subset1}
+learnr::question("What is the subset being taken?",
+         answer("Only cars that either do not have a V-shaped engine or have less than 20 mpg.", correct=FALSE),
+         answer("Only cars that both do not a V-shaped engine and have less than 20mpg.", correct = TRUE,  message = "Good job!"),
+         answer("Only cars that either do not have a V-shaped engine or have less than 20 mpg, but not both.",  correct = FALSE),
+         allow_retry = TRUE,
+         random_answer_order = TRUE
+)
+```
+
 The following table shows a list of some logical operators you might find useful.
 
 |Operator|Meaning|
@@ -114,15 +139,67 @@ The following table shows a list of some logical operators you might find useful
 | \| | or |
 
 
-## Submitting work
+## Exercises
+
+### Exercise 1
+
+Consider the `exam_scores` data that is included in the `umdpsyc` package. 
+
+```{r exercises-setup}
+data(exam_scores)
+```
+
+```{r exercise1-structure, echo = TRUE, exercise = TRUE}
+str(exam_scores)
+```
+
+How many variables are there in this dataset?
+
+```{r exercise1}
+learnr::question("How many variables are there in this dataset?",
+         answer("4", correct=FALSE),
+         answer("8", correct = TRUE,  message = "Good job!"),
+         answer("6",  correct = FALSE),
+         answer("2",  correct = FALSE),
+         answer("93",  correct = FALSE),
+         allow_retry = TRUE,
+         random_answer_order = TRUE
+)
+```
+
+### Exercise 2
+
+How would you look at the top few rows of this dataset?
+
+```{r exercise2, echo = TRUE, exercise = TRUE}
+
+```
+
+### Exercise 3
+
+How would you subset the dataset to only include people who took notes by paper? 
+
+```{r exercise3, echo = TRUE, exercise = TRUE}
+
+```
+
+```{r exercise3-check}
+grade_result(
+  pass_if(~ identical(.result, exam_scores[exam_scores$note_mode == 1,]), "Good job!"),
+  fail_if(~ TRUE, "Not quite. Try again.")
+)
+
+```
+
+### Submitting work
 
 ```{r submission-setup}
 submission_code <- function(UID, exercise = 'data-frames'){
-  print(UID * 21314 / 21114)
+  print(UID * 21314 / 21114 + 102)
 }
 ```
 
-
+Generate your submission code by putting in your UID in the function below. For example, if your UID is `2`, then your code should look like `submission_code(UID = 2)`
 ```{r submission, exercise = TRUE}
 submission_code(UID = )
 ```
