@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R"
+title: "Descriptive Statistics"
 output: 
   learnr::tutorial:
     progressive: true
@@ -14,126 +14,79 @@ tutorial:
 ```{r setup, include=FALSE}
 library(ggplot2)
 library(learnr)
+data(mtcars)
 knitr::opts_chunk$set(echo = FALSE)
 # learnr::tutorial_options(exercise.timelimit = 60)
 ```
 
-## Introduction to R 
+## Descriptive Statistics
 
-As psychologists, we use statistics to answer our research questions. We use statistical programs so that we do not have to compute statistics on large datasets by hand! 
+We use descriptive statistics to describe data.
 
-In this module, you will learn how to use the programming language, R, to analyze data. While there are many programs we could use, R has a few advantages: 
+## Measures of Center and Spread
 
-- FREE! (other statistical programs can cost thousands of dollars!)
-- R Open source, so we can see the code. This contributes to Open Science (which is a good thing)
-- It also means that researchers contribute coding packages, so it's easy to calculate many types of statistics and know exactly what you're doing
-- **Really** good graphs
-- Easy to reuse code (save time) and share (transparency in research)
+Many of the functions for getting numerical summaries of center and spread are intuitive in R. 
 
-### Four Windows 
+|Function|Type of Plot|
+|---|---|
+|`mean(x)`|Finds the mean of a vector `x`|
+| `median(x)` | Finds the median of a vector `x`.
+| `sd(x)` | Finds the standard deviation of a vector `x` |
+| `variance(x)` | Finds the variance of a vector `x` |
+| `IQR(x)` | Finds the IQR of a vector `x`|
+| `summary(x)` | Finds the min, 1st quartile, median, mean, 3rd quartile and max of a vector `x`, or of each column in a data frame `x`|
 
-- Top Left: R Markdown File: This is where you will answer questions and write code for R assignments. Anything you write in this Top Left window will save when you exit out of R 
-- Bottom Left: Console: This is a little like scrap paper. You can use this to try to answer questions or to write code, but anything written in this area will **NOT** save. This means we won't be able to grade anything written in this section! 
-- Top Right: Environment (and some other things): The top right section will be blank for now, but any variable you make or any data set you upload will be saved here.
-- Bottom Right: Everything else: There are several tabs you can open in this section. If you make graphs, you will be able to see them here(on the "Plots" Tab. Additionally, the "Help" tab will give you more information about the functions we will use in R 
 
-### The R Markdown File 
-R Markdown Files are great because we can both type regular text and include areas that we will code in. 
-- To write non-code, you don't have to do anything special, just write! 
-- When writing code, you need to create a coding area (R refers to these as **code chunks**)
-- To add a code chunk, click "Code" in the top tool bar and select "Insert Chunk." This will create a code chunk like this:
+## Plotting with R
 
-How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by selection "Run" in the tool bar underneath our R Markdown File name. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
+### Visualizing Numerical Variables
 
-Try running the following calculation examples. All you need to do is hit the "Run Code" button.
-```{r arithmetic1, exercise=TRUE}
-# Addition
-2+4
-```
 
-```{r arithmetic2, exercise=TRUE}
-# Subtraction
-13-2
-```
+The basic functions for plotting numerical variables in `R` are shown in the table below. 
 
-```{r arithmetic3, exercise=TRUE}
-# Multiplication
-7*4
-```
+|Function|Type of Plot|
+|---|---|
+|`hist(x)`|histogram|
+| `boxplot(x)` | boxplot |
+| `plot(x,y)` | scatterplot |
 
-```{r arithmetic4, exercise=TRUE}
-# Division
-100/20
-```
+For example, to get a simple histogram, we can use the following command.
 
-###
-
-Try doing some arithmetic on your own in the box below. You can run the code by clicking on the blue "Run Code" button at the top right of the box below. 
-
-```{r code_sandbox, exercise=TRUE, exercise.cap="Arithmetic"}
-
+```{r}
+hist(mtcars$hp, breaks = 20) # The "breaks = 20" argument sets the number of bins
 ```
 
 
-### Another example to work on 
+### Visualizing Categorical Variables
 
-```{r code_sandbox2, exercise=TRUE, exercise.cap="Arithmetic"}
+The base `R` graphics of categorical variables generally require you to give a table of the data as an argument. For example, let's make a basic barplot.
 
+```{r}
+barplot(table(mtcars$vs))
 ```
 
-## Functions 
+You can also use the `pie` function to create a pie chart, but we won't do that here. Remember, using a pie chart is highly discouraged.
 
-Much of what you do in R will involve using **functions**. Let's take a look at a simple function.
+To create a stacked bar chart, we can simply use a two-dimensional contingency table.
 
-```{r, echo=TRUE}
-print('Hello')
+```{r}
+barplot(table(mtcars$vs, mtcars$am))
 ```
 
-Here, we are calling a function called `print`. This function takes in one argument, or input: `'Hello'`. The arguments go inside parentheses, and provide the input values. The function then takes that input and performs some sort of action. In this case, as you might have guessed, the `print` function prints out whatever is provided as input. 
 
-### Data Types
+## Exercises
 
-Notice that the text we wanted to print is in quotation marks. This is because we want to create what is called a **string** object. In R, it is also called a **character** object. These are objects that represents **words**, as opposed to **numeric** objects which represent **numbers**. Essentially, the quotation marks tell R to treat whatever is inside as a **character value**.
 
-```{r function}
-learnr::question("Which of these is the correct way to call the `print` function to print the words 'some text here'?",
-         answer("print 'some text here'", correct=FALSE),
-         answer("print('some text here')", correct = TRUE,  message = "Good job!"),
-         answer("print(some text here)",  correct = FALSE),
-         allow_retry = TRUE,
-         random_answer_order = TRUE
-)
+
+### Submitting work
+
+```{r submission-setup}
+submission_code <- function(UID, exercise = 'data-frames'){
+  print(round(UID * (213 / 214 + 102)*4+1))
+}
 ```
 
-Let's look at a different function.
-
-```{r, echo = TRUE}
-sum(1,2)
-```
-
-THis function, `sum`, takes in two arguments. As you might be able to deduce, `sum` takes the sum of the two numbers. Notice that we could have just as easily used `1+2` instead of using the `sum` function. Though it didn't make a difference here, there are cases when we might prefer to use the `sum` function. For example, when you want to take the sum of a lot of numbers, it might be easier to use sum than having to type out a lot of `+` symbols. 
-
-Notice that we used `1` and `2` without quotation marks. This is because we wanted to add up **numeric** values rather than **character** values (because it doesn't make sense to add characters together). 
-
-## Packages 
-
-Many times, we want to use functions that other people have created and made available. We can do this easily using packages.
-
-```{r, echo=TRUE}
-library(openintro)
-```
-
-## Completing the Tutorial
-
-```{r test, exercise=TRUE, exercise.cap="UID"}
-qplot(1:10)
-```
-
-## Another Completing the Tutorial
-
-Write your UID below and hit submit.
-
-
-```{r UID, exercise=TRUE, exercise.cap="UID"}
-qplot(1:10)
+Generate your submission code by putting in your UID in the function below. For example, if your UID is `2`, then your code should look like `submission_code(UID = 2)`
+```{r submission, exercise = TRUE}
+submission_code(UID = )
 ```

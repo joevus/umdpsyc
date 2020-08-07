@@ -23,13 +23,20 @@ learnr::tutorial_options(
 
 ## Data Frames
 
-In R, the datasets that you will work with will mainly be in **data frames**. Data frames are just a type of object in R that consists of rows and columns of data, just like you might see in an Excel spreadsheet.
+In R, the datasets that you will work with will mainly be in **data frames**. Data frames are just a type of object in R that consists of rows and columns of data, just like you might see in an Excel spreadsheet. For example, we might have a dataset about cars that looks like the following:
 
 ```{r}
 data("mtcars")
+head(mtcars)
 ```
 
-In this tutorial, we will explore a variety of different functions for working with data frames to explore and analyze data. 
+Unlike an Excel spreadsheet, though, we don't have the full data open in front of us while we work on it in R. Instead, we store them inside **objects**, and use that object to get descriptive statistics, create graphs, and perform inference and hypothesis tests.
+
+In this tutorial, we will explore a variety of different functions for working with data frames to explore and analyze data. The first step of analyzing any dataset in R is getting familiar with it, so these functions are crucial to anything you do within R.
+
+This tutorial covers the following:
+* Displaying data and accessing elements of the data.
+* Subsetting data to get the portion that we want to work with.
 
 ## Displaying Data
 
@@ -67,7 +74,19 @@ If we want to access individual values or specific rows and columns in the data 
 mtcars[2,3] # this gets the third variable of the second observation
 ```
 
+### **Practice Question**
+
+Suppose we wanted to look at the horsepower of the first car in the data frame? How would we do this?
+
 ```{r accessing_values, exercise = TRUE}
+
+```
+
+```{r accessing_values-check}
+grade_result(
+  pass_if(~ identical(.result, mtcars[1,'hp']), "Good job!"),
+  fail_if(~ TRUE, "Not quite. Try again.")
+)
 
 ```
 

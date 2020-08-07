@@ -118,8 +118,15 @@ $(document).ready(function () {
 
 <div id="section-data-frames" class="section level2">
 <h2>Data Frames</h2>
-<p>In R, the datasets that you will work with will mainly be in <strong>data frames</strong>. Data frames are just a type of object in R that consists of rows and columns of data, just like you might see in an Excel spreadsheet.</p>
-<p>In this tutorial, we will explore a variety of different functions for working with data frames to explore and analyze data.</p>
+<p>In R, the datasets that you will work with will mainly be in <strong>data frames</strong>. Data frames are just a type of object in R that consists of rows and columns of data, just like you might see in an Excel spreadsheet. For example, we might have a dataset about cars that looks like the following:</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["disp"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["hp"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["drat"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["wt"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["qsec"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["vs"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["am"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gear"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["carb"],"name":[11],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","3":"160","4":"110","5":"3.90","6":"2.620","7":"16.46","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","3":"160","4":"110","5":"3.90","6":"2.875","7":"17.02","8":"0","9":"1","10":"4","11":"4","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","3":"108","4":"93","5":"3.85","6":"2.320","7":"18.61","8":"1","9":"1","10":"4","11":"1","_rn_":"Datsun 710"},{"1":"21.4","2":"6","3":"258","4":"110","5":"3.08","6":"3.215","7":"19.44","8":"1","9":"0","10":"3","11":"1","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","3":"360","4":"175","5":"3.15","6":"3.440","7":"17.02","8":"0","9":"0","10":"3","11":"2","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","3":"225","4":"105","5":"2.76","6":"3.460","7":"20.22","8":"1","9":"0","10":"3","11":"1","_rn_":"Valiant"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Unlike an Excel spreadsheet, though, we don’t have the full data open in front of us while we work on it in R. Instead, we store them inside <strong>objects</strong>, and use that object to get descriptive statistics, create graphs, and perform inference and hypothesis tests.</p>
+<p>In this tutorial, we will explore a variety of different functions for working with data frames to explore and analyze data. The first step of analyzing any dataset in R is getting familiar with it, so these functions are crucial to anything you do within R.</p>
+<p>This tutorial covers the following: * Displaying data and accessing elements of the data. * Subsetting data to get the portion that we want to work with.</p>
 </div>
 <div id="section-displaying-data" class="section level2">
 <h2>Displaying Data</h2>
@@ -151,9 +158,16 @@ $(document).ready(function () {
 <p>If we want to access individual values or specific rows and columns in the data frame, we can do this using square brackets.</p>
 <pre class="r"><code>mtcars[2,3] # this gets the third variable of the second observation</code></pre>
 <pre><code>## [1] 160</code></pre>
-<div class="tutorial-exercise" data-label="accessing_values" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false}</script>
 </div>
+<div id="section-practice-question" class="section level3">
+<h3><strong>Practice Question</strong></h3>
+<p>Suppose we wanted to look at the horsepower of the first car in the data frame? How would we do this?</p>
+<div class="tutorial-exercise" data-label="accessing_values" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
+</div>
+</div>
+<div id="section-accessing-columns" class="section level3">
+<h3>Accessing Columns</h3>
 <p>To look at individual columns, we can either leave the rows section blank or we can use “<code>$</code>” notation. Note that these are vectors in R.</p>
 <pre class="r"><code># All of these do the same thing
 mtcars$mpg</code></pre>
@@ -168,6 +182,9 @@ mtcars$mpg</code></pre>
 <pre><code>##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
 ## [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
 ## [31] 15.0 21.4</code></pre>
+</div>
+<div id="section-accessing-multiple-columns" class="section level3">
+<h3>Accessing Multiple Columns</h3>
 <p>If you want to look at multiple columns, we can do that by including a vector of numbers (representing column number) or a vector of column names. We can look at multiple rows by including a vector of rows, representing row numbers, as well.</p>
 <pre class="r"><code>mtcars[1:10, 2:4] # For columns 2 to 4</code></pre>
 <div data-pagedtable="false">
@@ -410,53 +427,54 @@ output$`tutorial-exercise-accessing_values-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache("accessing_values", list(chunks = list(list(label = "accessing_values", code = "", 
     opts = list(label = "\"accessing_values\"", exercise = "TRUE"), 
-    engine = "r")), code_check = NULL, check = NULL, solution = NULL, 
-    options = list(eval = FALSE, echo = TRUE, results = "markup", 
-        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
-        comment = NA, highlight = FALSE, strip.white = TRUE, 
-        size = "normalsize", background = "#F7F7F7", cache = 0, 
-        cache.path = "data-frames_cache/html/", cache.vars = NULL, 
-        cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
-        cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
-        fig.align = "default", fig.path = "data-frames_files/figure-html/", 
-        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
-        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
-        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
-        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
-        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
-        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
-        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
-        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
-        max.print = 1000, tutorial = TRUE, exercise.checker = function (label = NULL, 
-            solution_code = NULL, user_code = NULL, check_code = NULL, 
-            envir_result = NULL, evaluate_result = NULL, envir_prep = NULL, 
-            last_value = NULL, ...) 
-        {
-            (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
-                solution_code = solution_code, user_code = user_code, 
-                check_code = check_code, envir_result = envir_result, 
-                evaluate_result = evaluate_result, envir_prep = envir_prep, 
-                last_value = last_value, ...)
-        }, exercise.timelimit = 60, label = "accessing_values", 
-        exercise = TRUE, out.width.px = 624, out.height.px = 384, 
-        code = "", params.src = "accessing_values, exercise = TRUE", 
-        fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
+    engine = "r")), code_check = NULL, check = structure(c("grade_result(", 
+"  pass_if(~ identical(.result, mtcars[1,'hp']), \"Good job!\"),", 
+"  fail_if(~ TRUE, \"Not quite. Try again.\")", ")", ""), chunk_opts = list(
+    label = "accessing_values-check")), solution = NULL, options = list(
+    eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+    tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+    highlight = FALSE, strip.white = TRUE, size = "normalsize", 
+    background = "#F7F7F7", cache = 0, cache.path = "data-frames_cache/html/", 
+    cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, autodep = FALSE, 
+    cache.rebuild = FALSE, fig.keep = "high", fig.show = "asis", 
+    fig.align = "default", fig.path = "data-frames_files/figure-html/", 
+    dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+    fig.width = 6.5, fig.height = 4, fig.env = "figure", fig.cap = NULL, 
+    fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, fig.pos = "", 
+    out.width = 624, out.height = NULL, out.extra = NULL, fig.retina = 2, 
+    external = TRUE, sanitize = FALSE, interval = 1, aniopts = "controls,loop", 
+    warning = TRUE, error = FALSE, message = TRUE, render = NULL, 
+    ref.label = NULL, child = NULL, engine = "r", split = FALSE, 
+    include = TRUE, purl = TRUE, max.print = 1000, tutorial = TRUE, 
+    exercise.checker = function (label = NULL, solution_code = NULL, 
+        user_code = NULL, check_code = NULL, envir_result = NULL, 
+        evaluate_result = NULL, envir_prep = NULL, last_value = NULL, 
+        ...) 
+    {
+        (utils::getFromNamespace("grade_learnr_", "gradethis"))(label = label, 
+            solution_code = solution_code, user_code = user_code, 
+            check_code = check_code, envir_result = envir_result, 
+            evaluate_result = evaluate_result, envir_prep = envir_prep, 
+            last_value = last_value, ...)
+    }, exercise.timelimit = 60, label = "accessing_values", exercise = TRUE, 
+    out.width.px = 624, out.height.px = 384, code = "", params.src = "accessing_values, exercise = TRUE", 
+    fig.num = 0L, exercise.df_print = "paged"), engine = "r"))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "subset1", question = structure("What is the subset being taken?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_e5c0d97", 
+"character")), answers = list(structure(list(id = "lnr_ans_1c7d9ff", 
     option = "Only cars that either do not have a V-shaped engine or have less than 20 mpg.", 
     value = "Only cars that either do not have a V-shaped engine or have less than 20 mpg.", 
     label = structure("Only cars that either do not have a V-shaped engine or have less than 20 mpg.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_eadf486", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_94edd39", 
     option = "Only cars that both do not a V-shaped engine and have less than 20mpg.", 
     value = "Only cars that both do not a V-shaped engine and have less than 20mpg.", 
     label = structure("Only cars that both do not a V-shaped engine and have less than 20mpg.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Good job!", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
-)), structure(list(id = "lnr_ans_a2ba945", option = "Only cars that either do not have a V-shaped engine or have less than 20 mpg, but not both.", 
+)), structure(list(id = "lnr_ans_4b33b2f", option = "Only cars that either do not have a V-shaped engine or have less than 20 mpg, but not both.", 
     value = "Only cars that either do not have a V-shaped engine or have less than 20 mpg, but not both.", 
     label = structure("Only cars that either do not have a V-shaped engine or have less than 20 mpg, but not both.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
@@ -468,7 +486,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "subset1-answer", question = "subset1"), loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the subset being taken?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 3164799.49852628, options = list()), class = c("learnr_radio", 
+    seed = 631739312.705823, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
@@ -517,20 +535,20 @@ learnr:::store_exercise_cache("exercise1-structure", list(chunks = list(list(lab
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "exercise1", question = structure("How many variables are there in this dataset?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_603bfa0", 
+"character")), answers = list(structure(list(id = "lnr_ans_15b620e", 
     option = "4", value = "4", label = structure("4", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_61fea03", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d76d06e", 
     option = "8", value = "8", label = structure("8", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Good job!", html = TRUE, class = c("html", 
     "character"))), class = c("tutorial_question_answer", "tutorial_quiz_answer"
-)), structure(list(id = "lnr_ans_f43292e", option = "6", value = "6", 
+)), structure(list(id = "lnr_ans_5e0f18b", option = "6", value = "6", 
     label = structure("6", html = TRUE, class = c("html", "character"
     )), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_15be8f2", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_61b3310", 
     option = "2", value = "2", label = structure("2", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_24dba36", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_45daa", 
     option = "93", value = "93", label = structure("93", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
 "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html", 
@@ -541,7 +559,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "exercise1-answer", question = "exercise1"), loading = structure("<strong>Loading:<\u002fstrong> \nHow many variables are there in this dataset?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1592535337.25842, options = list()), class = c("learnr_radio", 
+    seed = 1211010689.93608, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
