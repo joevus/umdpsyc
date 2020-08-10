@@ -1,0 +1,144 @@
+---
+title: "T-tests"
+output: 
+  learnr::tutorial:
+    progressive: true
+runtime: shiny_prerendered
+tutorial:
+  id: "t-tests"
+  version: 0.5
+---
+
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+library(umdpsyc)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)
+learnr::tutorial_options(
+  exercise.timelimit = 60)
+
+```
+
+## Hypothesis Tests
+
+```{r}
+data("mtcars")
+```
+
+The steps to a hypothesis are:
+
+1) State your hypotheses.
+
+2) Set the criterion.
+
+3) Collect sample data.
+
+4) Calculate the test statistic.
+
+5) Evaluate and interpret.
+
+Most of these steps will be done outside of R, and in fact, they can generally only be done outside of R. However, R can be very useful for the computational part, step 4. 
+
+In this tutorial, we will use R to calculate the test statistic as part of performing a t-test.
+
+## Hypothesis Test Setup
+
+$$H_0: \mu = 12000 $$
+$$H_A: \mu \ne 12000$$
+
+
+## Using `t.test()`
+
+We can do the t-test by hand as we've shown, but `R` also has a convenient way of doing it using just the data. You do need to make sure you still go through all of the steps of performing a hypothesis test though --  the `t.test()` function will perform the test for you, but you need to make sure to provide all of the appropriate arguments.
+
+Let's look at doing a simple two-sided test, with a null hypothesis that $\mu = 12000$. We provide the vector of data points, as well as an argument providing the null value. In this case, since the value is in thousands, we use `mu = 12`. 
+
+```{r, echo = TRUE}
+t.test(mtcars$mpg, mu = 12)
+```
+
+By default, this does a two-sided test. What if we wanted to do a one-sided test? We can use the `alternative` argument to change it.
+
+```{r, echo = TRUE}
+# These are how to do one-sided tests.
+# Note: This is just to show that it's possible! Don't 
+# change the sidedness after the fact like this!
+t.test(mtcars$mpg, mu = 12, alternative = "greater")
+t.test(mtcars$mpg, mu = 12, alternative = "less")
+```
+
+Note that this doesn't provide the conclusion of the test for you. You need to make the correct conclusion from these results. Basically, you just need to take the p-value and compare it to the alpha level like before. 
+
+Lastly, notice that the output gives you information about the confidence interval. You can use the `t.test()` function to create confidence intervals as well. Just make sure you use the `conf.level` argument to specify the type of confidence interval you want.
+
+```{r, echo = TRUE}
+t.test(mtcars$mpg, conf.level = 0.99)
+```
+
+If you're just making a confidence interval, you can ignore the rest of the information. Here, I ran `t.test()` without anything for `mu` -- this gave me a test comparing it to 0, but I don't need that information since all I need is the confidence interval. 
+
+## Exercises
+
+### Exercise 1
+
+Consider the `exam_scores` data that is included in the `umdpsyc` package. 
+
+```{r exercises-setup}
+data(exam_scores)
+```
+
+```{r exercise1-structure, echo = TRUE, exercise = TRUE}
+str(exam_scores)
+```
+
+What is the mean?
+
+### Exercise 2
+
+How would you look at the top few rows of this dataset?
+
+```{r exercise2, echo = TRUE, exercise = TRUE}
+
+```
+
+### Exercise 3
+
+How would you subset the dataset to only include people who took notes by paper? 
+
+```{r exercise3, echo = TRUE, exercise = TRUE}
+
+```
+
+```{r exercise3-check}
+grade_result(
+  pass_if(~ identical(.result, exam_scores[exam_scores$note_mode == 1,]), "Good job!"),
+  fail_if(~ TRUE, "Not quite. Try again.")
+)
+
+```
+
+### Exercise 4
+
+```{r exercise4}
+learnr::question("What would be the conclusion from this hypothesis test?",
+         answer("Fail to reject the null hypothesis.", correct=FALSE),
+         answer("Reject the null hypothesis.", correct = TRUE,  message = "Good job!"),
+         allow_retry = TRUE,
+         random_answer_order = TRUE
+)
+```
+
+### Submitting work
+
+```{r submission-setup}
+submission_code <- function(UID, exercise = 'data-frames'){
+  httr::sha1_hash('ttest123',as.character(UID))
+}
+```
+
+Generate your submission code by putting in your UID in the function below. For example, if your UID is `2`, then your code should look like `submission_code(UID = 2)`
+```{r submission, exercise = TRUE}
+submission_code(UID = )
+```

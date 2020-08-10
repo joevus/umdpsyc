@@ -194,6 +194,17 @@ How would you look at the top few rows of this dataset?
 
 ```
 
+```{r exercise2-check}
+grade_result(
+  pass_if(~ identical(.result, head(exam_scores)), "Good job!"),
+  fail_if(~ !is.data.frame(.result), "Oops, looks like you aren't outputing a data frame."),
+  fail_if(~ nrow(.result) > 6, "We want to look at a few rows, not that many."),  
+  fail_if(~ identical(.result, exam_scores[1:nrow(.result),]), "This is technically correct, but try doing it using head to see the top 6 rows."),
+  fail_if(~ TRUE, "Not quite.")
+)
+
+```
+
 ### Exercise 3
 
 How would you subset the dataset to only include people who took notes by paper? 
@@ -205,7 +216,7 @@ How would you subset the dataset to only include people who took notes by paper?
 ```{r exercise3-check}
 grade_result(
   pass_if(~ identical(.result, exam_scores[exam_scores$note_mode == 1,]), "Good job!"),
-  fail_if(~ TRUE, "Not quite. Try again.")
+  fail_if(~ TRUE, "Not quite.")
 )
 
 ```
@@ -214,7 +225,7 @@ grade_result(
 
 ```{r submission-setup}
 submission_code <- function(UID, exercise = 'data-frames'){
-  print(UID * 21314 / 21114 + 102)
+  httr::sha1_hash('dataframes1',as.character(UID))
 }
 ```
 
