@@ -3,7 +3,7 @@
 \docType{data}
 \name{exam_scores}
 \alias{exam_scores}
-\title{Production and farm value of maple products in Canada}
+\title{Exam scores and sleep}
 \format{
 A data frame with columns:
 \describe{
@@ -20,7 +20,7 @@ Generated based on published results from various studies.
 exam_scores
 }
 \description{
-Production and farm value of maple products in Canada
+Exam scores and sleep
 }
 \examples{
 \dontrun{

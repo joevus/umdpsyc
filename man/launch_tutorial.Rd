@@ -10,7 +10,13 @@ launch_tutorial(tutorial)
 \item{tutorial}{character, representing the name of a tutorial to run. Options include:
 \enumerate{
 \item 'intro-to-r': A basic introduction to how to use R.
+\item 'data-frames': An introduction to using data frames in R.
+\item 'categorical-descriptives': Using R to do basic descriptive statistics with categorical data.
+\item 'numerical-descriptives': Using R to do basic descriptive statistics with numerical data.
+\item 'regression': Ordinary least squares regression using R.
 \item 't-tests': An introduction to doing t-tests in R.
+\item 'anova': Using R for ANOVA.
+\item 
 }}
 }
 \value{
