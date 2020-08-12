@@ -14,6 +14,7 @@ tutorial:
 library(learnr)
 library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)
 learnr::tutorial_options(
   exercise.timelimit = 60)
 ```
@@ -112,15 +113,16 @@ library(openintro)
 
 ### Arithmetic
 
-What is the value of $4 * (21 + 5 * 4)^2$?
+Use R to find the value of $4 * (21 + 5 * 4)^2$.
 
-```{r grade_result, exercise = TRUE}
+```{r exercise1, exercise = TRUE}
 
 ```
 
-```{r grade_result-check}
+```{r exercise1-check}
 grade_result(
-  pass_if()
+  pass_if(~ identical(.result, 4 * (21 + 5 * 4)^2), "Good Job!"),
+  fail_if(~ TRUE)
 )
 ```
 
@@ -134,10 +136,13 @@ Use the `print` function to print out the words `I've completed the tutorial!`.
 
 ### Submitting work
 
-```{r submission, exercise = TRUE}
-UID =  
+```{r submission-setup}
+submission_code <- function(UID, exercise = 'data-frames'){
+  httr::sha1_hash('intror',as.character(UID))
+}
 ```
 
-```{r submission-check}
-print(UID)
+Generate your submission code by putting in your UID in the function below. For example, if your UID is `2`, then your code should look like `submission_code(UID = 2)`
+```{r submission, exercise = TRUE}
+submission_code(UID = )
 ```
