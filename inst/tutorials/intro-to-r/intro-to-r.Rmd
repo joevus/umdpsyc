@@ -31,6 +31,9 @@ In this module, you will learn how to use the programming language, R, to analyz
 - **Really** good graphs
 - Easy to reuse code (save time) and share (transparency in research)
 
+### R-Studio
+
+
 ### Four Windows 
 
 - Top Left: R Markdown File: This is where you will answer questions and write code for R assignments. Anything you write in this Top Left window will save when you exit out of R 
@@ -38,13 +41,9 @@ In this module, you will learn how to use the programming language, R, to analyz
 - Top Right: Environment (and some other things): The top right section will be blank for now, but any variable you make or any data set you upload will be saved here.
 - Bottom Right: Everything else: There are several tabs you can open in this section. If you make graphs, you will be able to see them here(on the "Plots" Tab. Additionally, the "Help" tab will give you more information about the functions we will use in R 
 
-### The R Markdown File 
-R Markdown Files are great because we can both type regular text and include areas that we will code in. 
-- To write non-code, you don't have to do anything special, just write! 
-- When writing code, you need to create a coding area (R refers to these as **code chunks**)
-- To add a code chunk, click "Code" in the top tool bar and select "Insert Chunk." This will create a code chunk like this:
+### Running Code
 
-How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by selection "Run" in the tool bar underneath our R Markdown File name. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
+How do we get R to give us answers to our codes? We need to tell it to "run" our code. We can do this by using the "Run" button. We can also run code by putting our cursor on the line we want to run and pressing "Command(Mac)/Control(PC)" and "Return/Enter". 
 
 Try running the following calculation examples
 ```{r, echo = TRUE}
@@ -111,7 +110,7 @@ library(openintro)
 
 ## Exercises 
 
-### Arithmetic
+### Exercise 1
 
 Use R to find the value of $4 * (21 + 5 * 4)^2$.
 

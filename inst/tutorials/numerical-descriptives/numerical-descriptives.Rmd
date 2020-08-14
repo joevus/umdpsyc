@@ -88,6 +88,38 @@ grade_result(
 ```
 
 
+### Exercise 2
+
+What is the overall mean of all exam scores? 
+
+```{r exercise2, exercise=TRUE}
+
+```
+
+```{r exercise2-check}
+grade_result(
+  pass_if(~ identical(.result, mean(exam_scores$score, na.rm = TRUE)), "Good Job!"),
+  fail_if(~ TRUE)
+)
+```
+
+### Exercise 3
+
+How would you find a histogram of the exam scores for all students who used a computer as their method of note-taking? 
+
+**Hint:** This is a two step process. First, you need to subset, then you need to create the graph.
+
+```{r exercise3, exercise=TRUE}
+
+```
+
+```{r exercise3-check}
+grade_result(
+  pass_if(~ identical(.result, hist(exam_scores[exam_scores$note_mode == 2,])), "Good Job!"),
+  fail_if(~ TRUE)
+)
+```
+
 
 ### Submitting work
 

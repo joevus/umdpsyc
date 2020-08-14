@@ -93,8 +93,21 @@ data(exam_scores)
 str(exam_scores)
 ```
 
-What is the mean?
+Suppose you are interested in whether there is a relationship between the method of note-taking and the score on exam 1. That is, in words, your null hypothesis is that the mean score on exam 1 for students who took notes by paper is the same as the mean score on exam 1 for students who took notes by computer. Your alternative hypothesis is that they are not the same. You use a two-sided test, and set an alpha level of 0.05. How would you run the test in R?
 
+```{r exercise1, echo = TRUE, exercise = TRUE}
+
+```
+
+
+
+```{r exercise1-check}
+grade_result(
+  pass_if(~ identical(.result, t.test(exam1 ~ note_mode, data = exam_scores)), "Good job!"),
+  fail_if(~ TRUE, "Not quite. Try again.")
+)
+
+```
 ### Exercise 2
 
 How would you look at the top few rows of this dataset?
