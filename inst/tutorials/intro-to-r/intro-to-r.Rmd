@@ -74,6 +74,8 @@ Try doing some arithmetic on your own in the box below. You can run the code by 
 
 ## Functions
 
+### 
+
 Much of what you do in R will involve using **functions**. Let's take a look at a simple function.
 
 ```{r, echo=TRUE}
@@ -82,9 +84,15 @@ print('Hello')
 
 Here, we are calling a function called `print`. This function takes in one argument, or input: `'Hello'`. The arguments go inside parentheses, and provide the input values. The function then takes that input and performs some sort of action. In this case, as you might have guessed, the `print` function prints out whatever is provided as input. 
 
+Try writing some code yourself to print out a message of your choice. Note that the text you want to print out has to be in quotes, though it doesn't matter whether it's double quotes (`"`) or single quotes (`'`).
+
+```{r printing_practice, exercise=TRUE, exercise.cap="Print"}
+
+```
+
 ### Data Types
 
-Notice that the text we wanted to print is in quotation marks. This is because we want to create what is called a **string** object. In R, it is also called a **character** object. These are objects that represents **words**, as opposed to **numeric** objects which represent **numbers**. Essentially, the quotation marks tell R to treat whatever is inside as a **character value**.
+As mentioned above, the text we wanted to print has to be in quotation marks. This is because we want to create what is called a **string** object. In R, it is also called a **character** object. These are objects that represents **words**, as opposed to **numeric** objects which represent **numbers**. Essentially, the quotation marks tell R to treat whatever is inside as a **character value**.
 
 ```{r function}
 learnr::question("Which of these is the correct way to call the `print` function to print the words 'some text here'?",

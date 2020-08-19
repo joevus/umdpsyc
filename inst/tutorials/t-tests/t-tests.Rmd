@@ -24,7 +24,7 @@ learnr::tutorial_options(
 ## Hypothesis Tests
 
 ```{r}
-data("mtcars")
+data("exam_scores")
 ```
 
 The steps to a hypothesis are:
@@ -45,18 +45,18 @@ In this tutorial, we will use R to calculate the test statistic as part of perfo
 
 ## Hypothesis Test Setup
 
-$$H_0: \mu = 12000 $$
-$$H_A: \mu \ne 12000$$
+$$H_0: \mu = 80 $$
+$$H_A: \mu \ne 80$$
 
 
 ## Using `t.test()`
 
-We can do the t-test by hand as we've shown, but `R` also has a convenient way of doing it using just the data. You do need to make sure you still go through all of the steps of performing a hypothesis test though --  the `t.test()` function will perform the test for you, but you need to make sure to provide all of the appropriate arguments.
+We can do the t-test by hand by calculating the test statistic and finding the critical value, but `R` also has a convenient way of doing it using just the data with the `t.test` function. You do need to make sure you still go through all of the steps of performing a hypothesis test though --  the `t.test()` function will perform the test for you, but you need to make sure to provide all of the appropriate arguments.
 
-Let's look at doing a simple two-sided test, with a null hypothesis that $\mu = 12000$. We provide the vector of data points, as well as an argument providing the null value. In this case, since the value is in thousands, we use `mu = 12`. 
+Let's look at doing a simple two-sided test, with a null hypothesis that $\mu = 12000$. We provide the vector of data points, as well as an argument providing the null value. In this case, since the value is in thousands, we use `mu = 80`. 
 
 ```{r, echo = TRUE}
-t.test(mtcars$mpg, mu = 12)
+t.test(exam_scores$exam1, mu = 80)
 ```
 
 By default, this does a two-sided test. What if we wanted to do a one-sided test? We can use the `alternative` argument to change it.
@@ -65,8 +65,8 @@ By default, this does a two-sided test. What if we wanted to do a one-sided test
 # These are how to do one-sided tests.
 # Note: This is just to show that it's possible! Don't 
 # change the sidedness after the fact like this!
-t.test(mtcars$mpg, mu = 12, alternative = "greater")
-t.test(mtcars$mpg, mu = 12, alternative = "less")
+t.test(exam_scores$exam1, mu = 80, alternative = "greater")
+t.test(exam_scores$exam1, mu = 80, alternative = "less")
 ```
 
 Note that this doesn't provide the conclusion of the test for you. You need to make the correct conclusion from these results. Basically, you just need to take the p-value and compare it to the alpha level like before. 
@@ -78,6 +78,8 @@ t.test(mtcars$mpg, conf.level = 0.99)
 ```
 
 If you're just making a confidence interval, you can ignore the rest of the information. Here, I ran `t.test()` without anything for `mu` -- this gave me a test comparing it to 0, but I don't need that information since all I need is the confidence interval. 
+
+## Independent Samples t-test
 
 ## Exercises
 

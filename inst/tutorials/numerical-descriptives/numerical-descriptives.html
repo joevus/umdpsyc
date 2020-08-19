@@ -118,10 +118,24 @@ $(document).ready(function () {
 
 <div id="section-descriptive-statistics" class="section level2">
 <h2>Descriptive Statistics</h2>
-<p>We use descriptive statistics to describe data.</p>
+<div id="section-section" class="section level3">
+<h3></h3>
+<p>One of the first steps that you might take once you have some data in R is to look at descriptive statistics. Remember, the types of descriptive statistics that you use will be different depending on whether it is categorical or numerical data. We will look at numerical descriptive statistics and graphs here; check out the <code>categorical-descriptives</code> tutorial in order to learn about how to do descriptive statistics and graphs for categorical data.</p>
+</div>
+<div id="section-example-dataset-exam-scores" class="section level3">
+<h3>Example Dataset: Exam Scores</h3>
+<p>In the examples for this tutorial, we will use the exam scores dataset.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["exam1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["motivation"],"name":[2],"type":["int"],"align":["right"]},{"label":["note_mode"],"name":[3],"type":["int"],"align":["right"]},{"label":["exam2"],"name":[4],"type":["int"],"align":["right"]},{"label":["anxiety"],"name":[5],"type":["int"],"align":["right"]},{"label":["sleep_week"],"name":[6],"type":["int"],"align":["right"]},{"label":["sleep_day"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"100","2":"4","3":"1","4":"92","5":"2","6":"2940","7":"374","_rn_":"1"},{"1":"82","2":"6","3":"1","4":"94","5":"2","6":"3500","7":"125","_rn_":"2"},{"1":"98","2":"9","3":"1","4":"84","5":"2","6":"3479","7":"402","_rn_":"3"},{"1":"97","2":"6","3":"1","4":"100","5":"2","6":"3409","7":"291","_rn_":"4"},{"1":"72","2":"8","3":"1","4":"87","5":"2","6":"3430","7":"438","_rn_":"5"},{"1":"94","2":"7","3":"1","4":"89","5":"2","6":"3220","7":"222","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
 </div>
 <div id="section-measures-of-center-and-spread" class="section level2">
 <h2>Measures of Center and Spread</h2>
+<div id="section-section-1" class="section level3">
+<h3></h3>
 <p>Many of the functions for getting numerical summaries of center and spread are intuitive in R.</p>
 <table>
 <colgroup>
@@ -161,9 +175,13 @@ $(document).ready(function () {
 </tr>
 </tbody>
 </table>
+<p>In general, these are used on a vector, rather than a data frame, so you’ll need to be careful to specify the correct column within the data frame.</p>
+<pre class="r"><code>mean(exam_scores$exam1)</code></pre>
+<pre><code>## [1] 82.16667</code></pre>
 </div>
-<div id="section-plotting-with-r" class="section level2">
-<h2>Plotting with R</h2>
+</div>
+<div id="section-plotting-with-base-r" class="section level2">
+<h2>Plotting with base R</h2>
 <div id="section-visualizing-numerical-variables" class="section level3">
 <h3>Visualizing Numerical Variables</h3>
 <p>The basic functions for plotting numerical variables in <code>R</code> are shown in the table below.</p>
@@ -190,8 +208,53 @@ $(document).ready(function () {
 </tbody>
 </table>
 <p>For example, to get a simple histogram, we can use the following command.</p>
-<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-1-1.png" width="624" /></p>
-<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-2-1.png" width="624" /></p>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-3-1.png" width="624" /></p>
+<p>We can make adjustments to this graph by adding additional <strong>arguments</strong> to the <code>hist</code> function. Arguments are the inputs that we provide a function. Above, we only provided one argument: the data to be plotted. We can also specify that we want a different number of bins, for example.</p>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<div id="section-boxplots" class="section level3">
+<h3>Boxplots</h3>
+<p>We can make boxplots using the <code>boxplots</code> function.</p>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+</div>
+<div id="section-plotting-with-qplot" class="section level2">
+<h2>Plotting with <code>qplot</code></h2>
+<div id="section-section-2" class="section level3">
+<h3></h3>
+<p>As we mentioned before in the <code>intro-to-r</code> tutorial, there are external packages that contain various functions, data, and other tools to help us do more with R. One of these is the <code>ggplot2</code> package, which contains many functions for generating visually pleasing graphs.</p>
+<p>The <code>ggplot2</code> package is incredibly rich and highly customizable for an experienced user. There is an <a href="https://ggplot2-book.org/">entire book</a> you can read through on using <code>ggplot2</code> to create graphics, and the code can get quite complicated. We won’t go over all of that in this short introduction to producing graphs. Rather, in this tutorial, we’ll focus on one function, <code>qplot</code>, which is a quick way of getting nice looking graphs without doing much work.</p>
+</div>
+<div id="section-using-qplot" class="section level3">
+<h3>Using <code>qplot</code></h3>
+<p>The idea behind <code>qplot</code> is that it can be used to generate graphs very quickly using just one function. To do this, it tries to detect the type of data being plotted, and generates an appropriate graph based on this. Let’s try using <code>qplot</code> with exam scores.</p>
+<pre class="r"><code>qplot(exam_scores$exam1)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<div id="section-section-3" class="section level3">
+<h3></h3>
+<p>Instead of using <code>breaks</code> as an argument to specify the number of bins we want for the histogram, we use <code>bins</code> with <code>qplot</code>.</p>
+<pre class="r"><code>qplot(exam_scores$exam1, bins = 10)</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-8-1.png" width="624" /></p>
+</div>
+<div id="section-section-4" class="section level3">
+<h3></h3>
+<p>This made a histogram, exactly like we might have wanted. If we wanted a boxplot instead, we can add an additional argument to specify this. Note that we specify <code>y=</code> because we want to plot the graph on the y-axis. We’ll see why this is important shortly.</p>
+<pre class="r"><code>qplot(y = exam_scores$exam1, geom = &#39;boxplot&#39;)</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<div id="section-section-5" class="section level3">
+<h3></h3>
+<p>Making side-by-side boxplots is much easier with <code>qplot</code>. We can use the <code>x=</code> argument to specify which group to split on.</p>
+<pre class="r"><code>qplot(x = factor(exam_scores$note_mode), y = exam_scores$exam1, geom = &#39;boxplot&#39;)</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<div id="section-section-6" class="section level3">
+<h3></h3>
+<p>If we want to make a scatterplot, we can use it very similar to how we would use <code>plot</code>.</p>
+<pre class="r"><code>qplot(exam_scores$exam1, exam_scores$exam2)</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-11-1.png" width="624" /></p>
 </div>
 </div>
 <div id="section-exercises" class="section level2">
@@ -199,29 +262,31 @@ $(document).ready(function () {
 <p>Consider the <code>exam_scores</code> dataset.</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["score"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["hrs_sleep_per_week"],"name":[2],"type":["int"],"align":["right"]},{"label":["motivation"],"name":[3],"type":["int"],"align":["right"]},{"label":["note_mode"],"name":[4],"type":["int"],"align":["right"]},{"label":["note_mode_time_2"],"name":[5],"type":["int"],"align":["right"]},{"label":["anxiety"],"name":[6],"type":["int"],"align":["right"]},{"label":["sleep_per_week"],"name":[7],"type":["int"],"align":["right"]},{"label":["sleep_per_day"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"100","2":"420","3":"4","4":"1","5":"92","6":"2","7":"2940","8":"374","_rn_":"1"},{"1":"82","2":"500","3":"6","4":"1","5":"94","6":"2","7":"3500","8":"125","_rn_":"2"},{"1":"98","2":"497","3":"9","4":"1","5":"84","6":"2","7":"3479","8":"402","_rn_":"3"},{"1":"97","2":"487","3":"6","4":"1","5":"100","6":"2","7":"3409","8":"291","_rn_":"4"},{"1":"72","2":"490","3":"8","4":"1","5":"87","6":"2","7":"3430","8":"438","_rn_":"5"},{"1":"94","2":"460","3":"7","4":"1","5":"89","6":"2","7":"3220","8":"222","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["exam1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["motivation"],"name":[2],"type":["int"],"align":["right"]},{"label":["note_mode"],"name":[3],"type":["int"],"align":["right"]},{"label":["exam2"],"name":[4],"type":["int"],"align":["right"]},{"label":["anxiety"],"name":[5],"type":["int"],"align":["right"]},{"label":["sleep_week"],"name":[6],"type":["int"],"align":["right"]},{"label":["sleep_day"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"100","2":"4","3":"1","4":"92","5":"2","6":"2940","7":"374","_rn_":"1"},{"1":"82","2":"6","3":"1","4":"94","5":"2","6":"3500","7":"125","_rn_":"2"},{"1":"98","2":"9","3":"1","4":"84","5":"2","6":"3479","7":"402","_rn_":"3"},{"1":"97","2":"6","3":"1","4":"100","5":"2","6":"3409","7":"291","_rn_":"4"},{"1":"72","2":"8","3":"1","4":"87","5":"2","6":"3430","7":"438","_rn_":"5"},{"1":"94","2":"7","3":"1","4":"89","5":"2","6":"3220","7":"222","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <div id="section-exercise-1" class="section level3">
 <h3>Exercise 1</h3>
-<p>What is the overall mean of all exam scores?</p>
+<p>What is the overall mean of all exam scores for exam 2?</p>
 <div class="tutorial-exercise" data-label="exercise1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
 </div>
 <div id="section-exercise-2" class="section level3">
 <h3>Exercise 2</h3>
-<p>What is the overall mean of all exam scores?</p>
+<p>What is the mean of exam 1 scores for students who took notes with paper?</p>
 <div class="tutorial-exercise" data-label="exercise2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
 </div>
 </div>
 <div id="section-exercise-3" class="section level3">
 <h3>Exercise 3</h3>
-<p>How would you find a histogram of the exam scores for all students who used a computer as their method of note-taking?</p>
-<p><strong>Hint:</strong> This is a two step process. First, you need to subset, then you need to create the graph.</p>
+<p>Create a histogram of the exam 1 scores for all students who used a computer as their method of note-taking. Use 15 bins in the histogram, and use the base R method (not using <code>qplot</code>).</p>
 <div class="tutorial-exercise" data-label="exercise3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":true}</script>
+</div>
+<div id="section-exercise3-hint">
+<p><strong>Hint:</strong> This is a two step process. First, you need to subset, then you need to create the graph.</p>
 </div>
 </div>
 <div id="section-submitting-work" class="section level3">
@@ -238,6 +303,7 @@ library(umdpsyc)
 library(learnr)
 library(gradethis)
 data(mtcars)
+data("exam_scores")
 knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
 # learnr::tutorial_options(exercise.timelimit = 60)
@@ -259,14 +325,16 @@ session$onSessionEnded(function() {
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("library(ggplot2)", "library(umdpsyc)", "library(learnr)", 
-"library(gradethis)", "data(mtcars)", "knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)", 
+"library(gradethis)", "data(mtcars)", "data(\"exam_scores\")", 
+"knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)", 
 "knitr::opts_chunk$set(echo = FALSE)", "# learnr::tutorial_options(exercise.timelimit = 60)"
 ), overwrite = FALSE)
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_setup_chunk("__setup__", c("library(ggplot2)", "library(umdpsyc)", "library(learnr)", 
-"library(gradethis)", "data(mtcars)", "knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)", 
+"library(gradethis)", "data(mtcars)", "data(\"exam_scores\")", 
+"knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)", 
 "knitr::opts_chunk$set(echo = FALSE)", "# learnr::tutorial_options(exercise.timelimit = 60)"
 ), overwrite = FALSE)
 </script>
@@ -281,7 +349,7 @@ output$`tutorial-exercise-exercise1-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache("exercise1", list(chunks = list(list(label = "exercise1", code = "", opts = list(
     label = "\"exercise1\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, mean(exam_scores$score, na.rm = TRUE)), \"Good Job!\"),", 
+    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, mean(exam_scores$exam2)), \"Good Job!\"),", 
     "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "exercise1-check")), 
     solution = NULL, options = list(eval = FALSE, echo = TRUE, 
         results = "markup", tidy = FALSE, tidy.opts = NULL, collapse = FALSE, 
@@ -324,7 +392,7 @@ output$`tutorial-exercise-exercise2-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache("exercise2", list(chunks = list(list(label = "exercise2", code = "", opts = list(
     label = "\"exercise2\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, mean(exam_scores$score, na.rm = TRUE)), \"Good Job!\"),", 
+    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, mean(exam_scores$exam1[exam_scores$note_mode == 1])), \"Good Job!\"),", 
     "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "exercise2-check")), 
     solution = NULL, options = list(eval = FALSE, echo = TRUE, 
         results = "markup", tidy = FALSE, tidy.opts = NULL, collapse = FALSE, 
@@ -367,7 +435,8 @@ output$`tutorial-exercise-exercise3-output` <- renderUI({
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::store_exercise_cache("exercise3", list(chunks = list(list(label = "exercise3", code = "", opts = list(
     label = "\"exercise3\"", exercise = "TRUE"), engine = "r")), 
-    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, hist(exam_scores[exam_scores$note_mode == 2,])), \"Good Job!\"),", 
+    code_check = NULL, check = structure(c("grade_result(", "  pass_if(~ identical(.result, hist(exam_scores[exam_scores$note_mode == 2,'exam1'], breaks = 15)), \"Good Job!\"),", 
+    "  # pass_if(~ isTRUE(all.equal(.result, qplot(exam_scores[exam_scores$note_mode == 2,'exam1'], bins = 15))), \"Good Job!\"),", 
     "  fail_if(~ TRUE)", ")"), chunk_opts = list(label = "exercise3-check")), 
     solution = NULL, options = list(eval = FALSE, echo = TRUE, 
         results = "markup", tidy = FALSE, tidy.opts = NULL, collapse = FALSE, 
@@ -451,7 +520,7 @@ learnr:::store_exercise_cache("submission", list(chunks = list(list(label = "sub
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","colorspace","compiler","crayon","curl","datasets","digest","dplyr","ellipsis","evaluate","fastmap","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","htmltools","htmlwidgets","httpuv","jsonlite","knitr","later","lazyeval","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","rlang","rmarkdown","rprojroot","scales","shiny","stats","stringi","stringr","tibble","tidyselect","tools","umdpsyc","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.8","3.6.3","1.4-1","3.6.3","1.3.4","4.3","3.6.3","0.6.25","0.8.5","0.3.1","0.14","1.0.1","3.2.1","1.4.1","0.1.0.9004","3.6.3","3.6.3","3.6.3","0.3.0","0.5.0.9000","1.5.1","1.5.4","1.7.0","1.29","1.1.0.1","0.2.2","0.10.1.9006","0.2.0","1.5","1.1","3.6.3","0.9","0.5.0","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","0.4.7","2.3","1.3-2","1.1.0","1.5.0","3.6.3","1.4.6","1.4.0","3.0.3","1.0.0","3.6.3","0.0.0.9000","3.6.3","0.3.2","2.2.0","0.16","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","colorspace","compiler","crayon","curl","datasets","digest","dplyr","ellipsis","evaluate","farver","fastmap","ggplot2","glue","gradethis","graphics","grDevices","grid","gtable","htmltools","htmlwidgets","httpuv","jsonlite","knitr","labeling","later","lazyeval","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","rlang","rmarkdown","rprojroot","scales","shiny","stats","stringi","stringr","tibble","tidyselect","tools","umdpsyc","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.1.8","3.6.3","1.4-1","3.6.3","1.3.4","4.3","3.6.3","0.6.25","0.8.5","0.3.1","0.14","2.0.3","1.0.1","3.2.1","1.4.1","0.1.0.9004","3.6.3","3.6.3","3.6.3","0.3.0","0.5.0.9000","1.5.1","1.5.4","1.7.0","1.29","0.3","1.1.0.1","0.2.2","0.10.1.9006","0.2.0","1.5","1.1","3.6.3","0.9","0.5.0","1.4.6","2.0.3","1.1.1","0.3.4","2.4.1","1.0.5","0.4.7","2.3","1.3-2","1.1.0","1.5.0","3.6.3","1.4.6","1.4.0","3.0.3","1.0.0","3.6.3","0.0.0.9000","3.6.3","0.3.2","2.2.0","0.16","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

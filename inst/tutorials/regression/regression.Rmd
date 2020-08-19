@@ -38,14 +38,36 @@ cor(exam_scores$sleep_week,exam_scores$exam1,method = 'pearson')
 ```
 ## Regression
 
+###
 
-## Packages
+Let's fit a least squares regression line to this. 
 
-Many times, we want to use functions that other people have created and made available. We can do this easily using packages.
-
-```{r, echo=TRUE}
-library(openintro)
+```{r simplemodel}
+exammod <- lm(exam1 ~ sleep_week, data = exam_scores)
+summary(exammod)
 ```
+
+Notice that the code to find the regression line is very similar to that of ANOVA. Essentially everything is the same except we use `lm()` instead of `aov()`. 
+
+### Regression Diagnostics
+
+To get regression diagnostic plots, we can simply use `plot()` on the model object. The main plots to focus on are the first two. The first one is the residual plot, which you should check to make sure there is no pattern and that there is constant variance. The second is a QQ-plot checking the normality of the residuals. 
+
+```{r}
+plot(exammod)
+```
+
+### Multiple Regression
+
+Just like we extended ANOVA to factorial ANOVA using a `*`, we can do the same to extend to multiple regression.
+
+```{r multmodel}
+exammod2 <- lm(exam2 ~ exam1 * sleep_week, data = exam_scores)
+summary(exammod2)
+```
+
+Notice that the interaction is significant, even though none of the main effects are significant. This does sometimes happen, and that's because the "main effect" doesn't have the same interpretation anymore in the presence of an interaction. The coefficient for each just represent the effect when the other is at 0. So, for example, `-0.002729` is the effect of `SATSum` when `HSGPA` is 0. The interaction being significant in this case is actually an indication that the effect of `SATSum` is significant for other values of `HSGPA`.
+
 
 ## Exercises
 

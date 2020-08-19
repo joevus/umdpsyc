@@ -131,52 +131,52 @@ $(document).ready(function () {
 </div>
 <div id="section-hypothesis-test-setup" class="section level2">
 <h2>Hypothesis Test Setup</h2>
-<p><span class="math display">\[H_0: \mu = 12000 \]</span> <span class="math display">\[H_A: \mu \ne 12000\]</span></p>
+<p><span class="math display">\[H_0: \mu = 80 \]</span> <span class="math display">\[H_A: \mu \ne 80\]</span></p>
 </div>
 <div id="section-using-t.test" class="section level2">
 <h2>Using <code>t.test()</code></h2>
-<p>We can do the t-test by hand as we’ve shown, but <code>R</code> also has a convenient way of doing it using just the data. You do need to make sure you still go through all of the steps of performing a hypothesis test though – the <code>t.test()</code> function will perform the test for you, but you need to make sure to provide all of the appropriate arguments.</p>
-<p>Let’s look at doing a simple two-sided test, with a null hypothesis that <span class="math inline">\(\mu = 12000\)</span>. We provide the vector of data points, as well as an argument providing the null value. In this case, since the value is in thousands, we use <code>mu = 12</code>.</p>
-<pre class="r"><code>t.test(mtcars$mpg, mu = 12)</code></pre>
+<p>We can do the t-test by hand by calculating the test statistic and finding the critical value, but <code>R</code> also has a convenient way of doing it using just the data with the <code>t.test</code> function. You do need to make sure you still go through all of the steps of performing a hypothesis test though – the <code>t.test()</code> function will perform the test for you, but you need to make sure to provide all of the appropriate arguments.</p>
+<p>Let’s look at doing a simple two-sided test, with a null hypothesis that <span class="math inline">\(\mu = 12000\)</span>. We provide the vector of data points, as well as an argument providing the null value. In this case, since the value is in thousands, we use <code>mu = 80</code>.</p>
+<pre class="r"><code>t.test(exam_scores$exam1, mu = 80)</code></pre>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  mtcars$mpg
-## t = 7.5938, df = 31, p-value = 1.463e-08
-## alternative hypothesis: true mean is not equal to 12
+## data:  exam_scores$exam1
+## t = 2.2009, df = 89, p-value = 0.03033
+## alternative hypothesis: true mean is not equal to 80
 ## 95 percent confidence interval:
-##  17.91768 22.26357
+##  80.21063 84.12271
 ## sample estimates:
 ## mean of x 
-##  20.09062</code></pre>
+##  82.16667</code></pre>
 <p>By default, this does a two-sided test. What if we wanted to do a one-sided test? We can use the <code>alternative</code> argument to change it.</p>
 <pre class="r"><code># These are how to do one-sided tests.
 # Note: This is just to show that it&#39;s possible! Don&#39;t 
 # change the sidedness after the fact like this!
-t.test(mtcars$mpg, mu = 12, alternative = &quot;greater&quot;)</code></pre>
+t.test(exam_scores$exam1, mu = 80, alternative = &quot;greater&quot;)</code></pre>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  mtcars$mpg
-## t = 7.5938, df = 31, p-value = 7.315e-09
-## alternative hypothesis: true mean is greater than 12
+## data:  exam_scores$exam1
+## t = 2.2009, df = 89, p-value = 0.01516
+## alternative hypothesis: true mean is greater than 80
 ## 95 percent confidence interval:
-##  18.28418      Inf
+##  80.53039      Inf
 ## sample estimates:
 ## mean of x 
-##  20.09062</code></pre>
-<pre class="r"><code>t.test(mtcars$mpg, mu = 12, alternative = &quot;less&quot;)</code></pre>
+##  82.16667</code></pre>
+<pre class="r"><code>t.test(exam_scores$exam1, mu = 80, alternative = &quot;less&quot;)</code></pre>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  mtcars$mpg
-## t = 7.5938, df = 31, p-value = 1
-## alternative hypothesis: true mean is less than 12
+## data:  exam_scores$exam1
+## t = 2.2009, df = 89, p-value = 0.9848
+## alternative hypothesis: true mean is less than 80
 ## 95 percent confidence interval:
-##      -Inf 21.89707
+##      -Inf 83.80294
 ## sample estimates:
 ## mean of x 
-##  20.09062</code></pre>
+##  82.16667</code></pre>
 <p>Note that this doesn’t provide the conclusion of the test for you. You need to make the correct conclusion from these results. Basically, you just need to take the p-value and compare it to the alpha level like before.</p>
 <p>Lastly, notice that the output gives you information about the confidence interval. You can use the <code>t.test()</code> function to create confidence intervals as well. Just make sure you use the <code>conf.level</code> argument to specify the type of confidence interval you want.</p>
 <pre class="r"><code>t.test(mtcars$mpg, conf.level = 0.99)</code></pre>
@@ -192,6 +192,9 @@ t.test(mtcars$mpg, mu = 12, alternative = &quot;greater&quot;)</code></pre>
 ## mean of x 
 ##  20.09062</code></pre>
 <p>If you’re just making a confidence interval, you can ignore the rest of the information. Here, I ran <code>t.test()</code> without anything for <code>mu</code> – this gave me a test comparing it to 0, but I don’t need that information since all I need is the confidence interval.</p>
+</div>
+<div id="section-independent-samples-t-test" class="section level2">
+<h2>Independent Samples t-test</h2>
 </div>
 <div id="section-exercises" class="section level2">
 <h2>Exercises</h2>
@@ -454,11 +457,11 @@ learnr:::store_exercise_cache("exercise3", list(chunks = list(list(label = "exer
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "exercise4", question = structure("What would be the conclusion from this hypothesis test?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_a6a51ea", 
+"character")), answers = list(structure(list(id = "lnr_ans_9b20235", 
     option = "Fail to reject the null hypothesis.", value = "Fail to reject the null hypothesis.", 
     label = structure("Fail to reject the null hypothesis.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9863d38", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5538f84", 
     option = "Reject the null hypothesis.", value = "Reject the null hypothesis.", 
     label = structure("Reject the null hypothesis.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Good job!", html = TRUE, class = c("html", 
@@ -471,7 +474,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "exercise4-answer", question = "exercise4"), loading = structure("<strong>Loading:<\u002fstrong> \nWhat would be the conclusion from this hypothesis test?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 1807078977.15851, options = list()), class = c("learnr_radio", 
+    seed = 445184681.792695, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  

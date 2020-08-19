@@ -1,60 +1,77 @@
 ---
-title: "Descriptive Statistics"
+title: "Categorical Descriptive Statistics"
 output: 
   learnr::tutorial:
     progressive: true
 runtime: shiny_prerendered
 
 tutorial:
-  id: "descriptive-statistics"
+  id: "categorical-descriptives"
   version: 0.5
 ---
 
 
 ```{r setup, include=FALSE}
 library(ggplot2)
+library(umdpsyc)
 library(learnr)
 data(mtcars)
+data("exam_scores")
 knitr::opts_chunk$set(echo = FALSE)
 # learnr::tutorial_options(exercise.timelimit = 60)
 ```
 
-## Descriptive Statistics
+## Categorical Descriptive Statistics
 
-We use descriptive statistics to describe data.
+###
 
-## Measures of Center and Spread
+One of the first steps that you might take once you have some data in R is to look at descriptive statistics. Remember, the types of descriptive statistics that you use will be different depending on whether it is categorical or numerical data. We will look at categorical descriptive statistics and graphs here; check out the `numerical-descriptives` tutorial in order to learn about how to do descriptive statistics and graphs for numerical data.
 
-Many of the functions for getting numerical summaries of center and spread are intuitive in R. 
+## Tables
 
-|Function|Type of Plot|
-|---|---|
-|`mean(x)`|Finds the mean of a vector `x`|
-| `median(x)` | Finds the median of a vector `x`.
-| `sd(x)` | Finds the standard deviation of a vector `x` |
-| `variance(x)` | Finds the variance of a vector `x` |
-| `IQR(x)` | Finds the IQR of a vector `x`|
-| `summary(x)` | Finds the min, 1st quartile, median, mean, 3rd quartile and max of a vector `x`, or of each column in a data frame `x`|
+###
 
+One of the basic first steps you can take to summarize categorical variables is using a table to look at the counts within each category. 
+
+```{r, echo = TRUE}
+table(exam_scores$note_mode)
+```
+
+### Two-way table
+
+```{r, echo = TRUE}
+table(exam_scores$anxiety,exam_scores$note_mode)
+```
+
+### Proportions
+
+Overall proportions
+```{r, echo = TRUE}
+prop.table(table(exam_scores$anxiety,exam_scores$note_mode))
+```
+
+Row proportions
+```{r, echo = TRUE}
+prop.table(table(exam_scores$anxiety,exam_scores$note_mode),margin = 1)
+```
+
+Column proportions
+```{r, echo = TRUE}
+prop.table(table(exam_scores$anxiety,exam_scores$note_mode),margin = 2)
+```
 
 ## Plotting with R
 
-### Visualizing Numerical Variables
+### Visualizing Categorical Variables
 
 
 The basic functions for plotting numerical variables in `R` are shown in the table below. 
 
 |Function|Type of Plot|
 |---|---|
-|`hist(x)`|histogram|
-| `boxplot(x)` | boxplot |
-| `plot(x,y)` | scatterplot |
-
-For example, to get a simple histogram, we can use the following command.
-
-```{r}
-hist(mtcars$hp, breaks = 20) # The "breaks = 20" argument sets the number of bins
-```
+|`barplot(x)`|histogram|
+| `pie(x)` | pie chart |
+| `barplot(x,y)` | stacked bar chart |
 
 
 ### Visualizing Categorical Variables
@@ -70,9 +87,23 @@ You can also use the `pie` function to create a pie chart, but we won't do that 
 To create a stacked bar chart, we can simply use a two-dimensional contingency table.
 
 ```{r}
-barplot(table(mtcars$vs, mtcars$am))
+barplot(table(exam_scores$anxiety,exam_scores$note_mode))
 ```
 
+## Factor
+
+
+
+###
+
+Recall that we used `qplot` for boxplots, and used `y=` to specify the numerical variables. We can use the `x=` argument to specify which group to split on. 
+
+```{r, echo = TRUE}
+qplot(x = factor(exam_scores$note_mode), y = exam_scores$exam1, geom = 'boxplot')
+
+```
+
+Note that we had to use `factor` to change `exam_scores$note_mode` into a `factor` object, so that R knows that it is a categorical variable. Otherwise, it will think it is numerical (since it is coded as `1` or `2`), which is not what we want!
 
 ## Exercises
 
