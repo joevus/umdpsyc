@@ -27,6 +27,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 One of the first steps that you might take once you have some data in R is to look at descriptive statistics. Remember, the types of descriptive statistics that you use will be different depending on whether it is categorical or numerical data. We will look at categorical descriptive statistics and graphs here; check out the `numerical-descriptives` tutorial in order to learn about how to do descriptive statistics and graphs for numerical data.
 
+For the examples in this tutorial, we use the `exam_scores` dataset. 
+
+```{r}
+head(exam_scores)
+```
+
+
 ## Tables
 
 ###
@@ -92,9 +99,28 @@ barplot(table(exam_scores$anxiety,exam_scores$note_mode))
 
 ## Factor
 
-
-
 ###
+
+If you look back at the exam_scores dataset, you'll notice that there are categorical variables coded as numbers. For example, `note_mode`, referring the method of note-taking, is coded as `1` for paper and `2` for computer. The values of `1` or `2` don't actually mean anything other than to signify that there are two categories. 
+
+However, R doesn't know that! When it see the values of `1` or `2`, it thinks it's a numerical variable, and tries to treat it as such. Therefore, there are time when we might want to convert a variable into a **factor**. A **factor** is just another type of object (like **strings** or **numeric**), which specifically designed to be treated as a categorical variable. You can use the `factor` function in order to tell R to treat a variable as categorical in this way. 
+
+Let's look at an example. If we wanted to use `qplot` to plot a bar plot for the `note_mode` variable, we might try to do this.
+
+```{r, echo = TRUE}
+# Remember, qplot is in the ggplot2 package, so you need to bring it in if you have not already in your current R session.
+# library(ggplot2)
+
+qplot(note_mode, data = exam_scores)
+```
+
+However, this tries to give us a histogram instead of a bar plot, because R thinks it's a numerical variable! We can use `factor` to rectify this.
+
+```{r, echo = TRUE}
+qplot(factor(note_mode), data = exam_scores)
+```
+
+### Side-by-side boxplots
 
 Recall that we used `qplot` for boxplots, and used `y=` to specify the numerical variables. We can use the `x=` argument to specify which group to split on. 
 

@@ -110,7 +110,7 @@ The `ggplot2` package is incredibly rich and highly customizable for an experien
 
 ### Using `qplot`
 
-The idea behind `qplot` is that it can be used to generate graphs very quickly using just one function. To do this, it tries to detect the type of data being plotted, and generates an appropriate graph based on this. Let's try using `qplot` with exam scores.
+The idea behind `qplot` is that it can be used to generate graphs very quickly using just one function. To do this, it tries to detect the type of data being plotted, and generates an appropriate graph based on this. Let's try using `qplot` with exam scores. 
 
 ```{r, echo = TRUE}
 qplot(exam_scores$exam1)
@@ -118,10 +118,13 @@ qplot(exam_scores$exam1)
 
 ###
 
-Instead of using `breaks` as an argument to specify the number of bins we want for the histogram, we use `bins` with `qplot`.
+Instead of using `breaks` as an argument to specify the number of bins we want for the histogram, we use `bins` with `qplot`. In addition, we can use the `data` argument to make it easier to read and parse what is happening in the function. We show two ways of doing the same thing below, with the first commented out.
 
 ```{r, echo = TRUE}
-qplot(exam_scores$exam1, bins = 10)
+# This is the same thing
+# qplot(exam_scores$exam1, bins = 10)
+
+qplot(exam1, data = exam_scores, bins = 10)
 ```
 
 ### 
@@ -129,18 +132,20 @@ qplot(exam_scores$exam1, bins = 10)
 This made a histogram, exactly like we might have wanted. If we wanted a boxplot instead, we can add an additional argument to specify this. Note that we specify `y=` because we want to plot the graph on the y-axis. The `qplot` function for boxplots only works for putting the continuous variable on the y-axis -- in the `categorical-descriptives`, we'll go over side-by-side boxplots which can show the distributions by group in a categorical variable, and we'll have to specify `x=` there. For now, just remember to specify `y=` when using `qplot` for boxplots. 
 
 ```{r, echo = TRUE}
-qplot(y = exam_scores$exam1, geom = 'boxplot')
+qplot(y = exam1, data = exam_scores, geom = 'boxplot')
 ```
 
 
 ###
 
-If we want to make a scatterplot, we can use it very similar to how we would use `plot`.
+If we want to make a scatterplot, we can use it very similar to how we would use `plot`. 
 
 ```{r, echo = TRUE}
-qplot(exam_scores$exam1, exam_scores$exam2)
-```
+# This does the same thing
+# qplot(exam_scores$exam1, exam_scores$exam2)
 
+qplot(exam1, exam2, data = exam_scores)
+```
 
 
 ## Exercises

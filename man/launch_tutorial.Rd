@@ -11,8 +11,8 @@ launch_tutorial(tutorial)
 \enumerate{
 \item \code{'intro-to-r'}: A basic introduction to how to use R.
 \item \code{'data-frames'}: An introduction to using data frames in R.
-\item \code{'categorical-descriptives'}: Using R to do basic descriptive statistics with categorical data.
 \item \code{'numerical-descriptives'}: Using R to do basic descriptive statistics with numerical data.
+\item \code{'categorical-descriptives'}: Using R to do basic descriptive statistics with categorical data.
 \item \code{'regression'}: Ordinary least squares regression using R.
 \item \code{'t-tests'}: An introduction to doing t-tests in R.
 \item \code{'anova'}: Using R for ANOVA.

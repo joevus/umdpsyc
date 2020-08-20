@@ -234,27 +234,27 @@ $(document).ready(function () {
 </div>
 <div id="section-section-3" class="section level3">
 <h3></h3>
-<p>Instead of using <code>breaks</code> as an argument to specify the number of bins we want for the histogram, we use <code>bins</code> with <code>qplot</code>.</p>
-<pre class="r"><code>qplot(exam_scores$exam1, bins = 10)</code></pre>
+<p>Instead of using <code>breaks</code> as an argument to specify the number of bins we want for the histogram, we use <code>bins</code> with <code>qplot</code>. In addition, we can use the <code>data</code> argument to make it easier to read and parse what is happening in the function. We show two ways of doing the same thing below, with the first commented out.</p>
+<pre class="r"><code># This is the same thing
+# qplot(exam_scores$exam1, bins = 10)
+
+qplot(exam1, data = exam_scores, bins = 10)</code></pre>
 <p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
 <div id="section-section-4" class="section level3">
 <h3></h3>
-<p>This made a histogram, exactly like we might have wanted. If we wanted a boxplot instead, we can add an additional argument to specify this. Note that we specify <code>y=</code> because we want to plot the graph on the y-axis. We’ll see why this is important shortly.</p>
-<pre class="r"><code>qplot(y = exam_scores$exam1, geom = &#39;boxplot&#39;)</code></pre>
+<p>This made a histogram, exactly like we might have wanted. If we wanted a boxplot instead, we can add an additional argument to specify this. Note that we specify <code>y=</code> because we want to plot the graph on the y-axis. The <code>qplot</code> function for boxplots only works for putting the continuous variable on the y-axis – in the <code>categorical-descriptives</code>, we’ll go over side-by-side boxplots which can show the distributions by group in a categorical variable, and we’ll have to specify <code>x=</code> there. For now, just remember to specify <code>y=</code> when using <code>qplot</code> for boxplots.</p>
+<pre class="r"><code>qplot(y = exam1, data = exam_scores, geom = &#39;boxplot&#39;)</code></pre>
 <p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
 <div id="section-section-5" class="section level3">
 <h3></h3>
-<p>Making side-by-side boxplots is much easier with <code>qplot</code>. We can use the <code>x=</code> argument to specify which group to split on.</p>
-<pre class="r"><code>qplot(x = factor(exam_scores$note_mode), y = exam_scores$exam1, geom = &#39;boxplot&#39;)</code></pre>
-<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-10-1.png" width="624" /></p>
-</div>
-<div id="section-section-6" class="section level3">
-<h3></h3>
 <p>If we want to make a scatterplot, we can use it very similar to how we would use <code>plot</code>.</p>
-<pre class="r"><code>qplot(exam_scores$exam1, exam_scores$exam2)</code></pre>
-<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-11-1.png" width="624" /></p>
+<pre class="r"><code># This does the same thing
+# qplot(exam_scores$exam1, exam_scores$exam2)
+
+qplot(exam1, exam2, data = exam_scores)</code></pre>
+<p><img src="numerical-descriptives_files/figure-html/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
 </div>
 <div id="section-exercises" class="section level2">
