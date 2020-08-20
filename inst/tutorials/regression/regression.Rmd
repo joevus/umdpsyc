@@ -24,8 +24,9 @@ learnr::tutorial_options(
 data(exam_scores)
 ```
 
-### Spearman's Rho
+You can use the same function to find both Spearman's Rho rank correlation and Pearson's correlation. The `cor` function is used for both, and you simply specify the method as an argument in the function. The first two arguments are the variables you want to find the correlation for, while the third is the type of correlation that you want to find. 
 
+### Spearman's Rho
 
 ```{r}
 cor(exam_scores$motivation,exam_scores$exam1,method = 'spearman')
@@ -51,7 +52,7 @@ Notice that the code to find the regression line is very similar to that of ANOV
 
 ### Regression Diagnostics
 
-To get regression diagnostic plots, we can simply use `plot()` on the model object. The main plots to focus on are the first two. The first one is the residual plot, which you should check to make sure there is no pattern and that there is constant variance. The second is a QQ-plot checking the normality of the residuals. 
+To get regression diagnostic plots, we can simply use `plot()` on the model object. The first two plots show the residuals. The first one is the residual plot, which you should check to make sure there is no pattern and that there is constant variance. The second is a QQ-plot checking the normality of the residuals. The next two are used to check for outliers and influential points.
 
 ```{r}
 plot(exammod)
@@ -62,7 +63,7 @@ plot(exammod)
 Just like we extended ANOVA to factorial ANOVA using a `*`, we can do the same to extend to multiple regression.
 
 ```{r multmodel}
-exammod2 <- lm(exam2 ~ exam1 * sleep_week, data = exam_scores)
+exammod2 <- lm(exam1 ~ motivation * sleep_week, data = exam_scores)
 summary(exammod2)
 ```
 

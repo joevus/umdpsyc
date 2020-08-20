@@ -18,38 +18,64 @@ learnr::tutorial_options(
   exercise.timelimit = 60)
 ```
 
-## ANOVA in R
+## ANOVA
 
-We can use R to do ANOVA. 
+As with t-tests, R is very useful for running ANOVA with large datasets. 
 
-This tutorial covers:
-- Using R for doing ANOVA
-- Interpreting R output for ANOVA
-- Doing factorial ANOVA
-
-## Using `aov`
 
 Consider the `exam_scores` dataset. 
 
-```{r}
+```{r,echo=TRUE}
 data(exam_scores)
-str(exam_scores)
+head(exam_scores)
 ```
 
-```{r}
+## ANOVA in R
+
+Suppose we are interested in seeing if there is a relationship between a student's reported anxiety score (low, medium, high) and their scores on an exam. Since the anxiety score has more than two levels, it wouldn't be appropriate to use a t-test in this case. Using ANOVA would allow us to see if there were any differences across the different levels of anxiety.
+
+As before, we won't go through all of the exact steps in writing out the hypotheses here, so remember to keep in mind that running the code is only a portion of the statistical analysis!
+
+
+### Using `aov`
+
+You can use the `aov` function to run ANOVA in R. The first argument uses the formula notation, with the "outcome" variable going on the lefthand side of a tilde (`~`) and the "predictor" going on the righthand side. Recall that we had to use the `factor` function in order to make sure R knows to treat a variable as categorical. The second argument is used to specify the data frame that we are pulling the data from. Here, we are going to be using the `exam_scores` data frame, and using the `exam1` and `anxiety` columns.
+
+The `aov` function outputs an `aov` object, which represents the ANOVA being run with the data. In order to see the result of the analysis, we need to use `summary` on this `aov` object.
+
+```{r,echo=TRUE}
 exam_anova <- aov(exam1 ~ factor(anxiety), data=exam_scores)
 summary(exam_anova)
 ```
 
+Note that this is the same sort of syntax used for running a linear model using `lm`, which is discussed in the `regression` tutorial. 
 
 ### ANOVA output
 
+The output from the `summary` function gives a lot of information about the ANOVA that was run. It essentially gives you everything you need to run the test, including degrees of freedom and sum of squares, as well as giving you the final F statistic and the p-value. The asterisks next to the p-value correspond to different alpha levels.  
+
+The output doesn't explicitly give you eta squared values, but you can actually compute it quite easily based on the provided output. Recall that the eta squared is found using 
+
+$$\eta^2 = \frac{SS_{effect}}{SS_{total}}$$
+So, we can find this using some simple arithmetic.
+
+```{r,echo=TRUE}
+2805/(2805+4958)
+```
 
 
 ### 
 
 ## Factorial ANOVA
 
+We use the `aov()` function with a formula to define the variables as we did before, except this time, we include both `number` and `spam`. In addition, we include them separated by a `*` sign. This is to make sure that it runs the ANOVA with including the interaction. If you don't include the `*` and instead use a `+`, then it won't include the interaction, and you'll be treating `number` and `spam` as independent.
+
+```{r, echo=TRUE}
+exam_anova2 <- aov(exam1 ~ note_mode * anxiety, data=exam_scores)
+summary(exam_anova2)
+```
+
+The output should look similar to a one-way ANOVA, except with additional variables.
 
 
 ## Exercises
