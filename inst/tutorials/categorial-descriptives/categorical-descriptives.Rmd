@@ -67,7 +67,7 @@ Column proportions
 prop.table(table(exam_scores$anxiety,exam_scores$note_mode),margin = 2)
 ```
 
-## Plotting with R
+## Plotting Categorical Variables
 
 ### Visualizing Categorical Variables
 
