@@ -180,7 +180,7 @@ learnr::question("How many variables are there in this dataset?",
          answer("8", correct = TRUE,  message = "Good job!"),
          answer("6",  correct = FALSE),
          answer("2",  correct = FALSE),
-         answer("93",  correct = FALSE),
+         answer("90",  correct = FALSE),
          allow_retry = TRUE,
          random_answer_order = TRUE
 )

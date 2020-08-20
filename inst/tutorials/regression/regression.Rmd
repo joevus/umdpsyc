@@ -12,6 +12,7 @@ tutorial:
 library(learnr)
 library(umdpsyc)
 library(gradethis)
+library(ggplot2)
 knitr::opts_chunk$set(exercise.checker = gradethis::grade_learnr)
 knitr::opts_chunk$set(echo = FALSE)
 learnr::tutorial_options(
@@ -23,6 +24,15 @@ learnr::tutorial_options(
 ```{r}
 data(exam_scores)
 ```
+
+```{r, echo=TRUE}
+qplot(exam_scores$motivation, exam_scores$exam1)
+```
+
+```{r, echo=TRUE}
+qplot(exam_scores$sleep_week, exam_scores$exam1)
+```
+
 
 You can use the same function to find both Spearman's Rho rank correlation and Pearson's correlation. The `cor` function is used for both, and you simply specify the method as an argument in the function. The first two arguments are the variables you want to find the correlation for, while the third is the type of correlation that you want to find. 
 
