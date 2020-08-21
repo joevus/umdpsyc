@@ -79,7 +79,37 @@ t.test(mtcars$mpg, conf.level = 0.99)
 
 If you're just making a confidence interval, you can ignore the rest of the information. Here, I ran `t.test()` without anything for `mu` -- this gave me a test comparing it to 0, but I don't need that information since all I need is the confidence interval. 
 
-## Independent Samples t-test
+## Two Sample t-tests
+
+### Independent Samples t-test
+
+Doing an independent samples t-test can be done one of two ways. If you have the data from the two samples in two vectors, you can simply use those vectors to run the t-test. In a data frame, this would mean that the two samples are stored as two separate columns. 
+
+If we wanted to run a t-test to see if there was as signficant difference between exam 1 and exam 2, then we could use the following code.
+
+```{r, echo = TRUE}
+t.test(exam_scores$exam1, exam_scores$exam2)
+```
+
+###
+
+What if the data were stored in a way such that all the values were in one column, with the corresponding groups in another column? That is, for example, what if we wanted to do an independent samples t-test for exams scores of students who took notes by paper compared to students who took notes by computer?
+
+We can use formula notation in this case.
+
+```{r, echo = TRUE}
+t.test(exam1 ~ note_mode, data = exam_scores)
+```
+
+On the left of the tilde (`~`), we have the numerical variable that we want to use the mean of. On the right side, we put the categorical variable that denotes which person is in which group. The `data = exam_scores` argument, as before, denotes which data to pull these columns from. 
+
+### Paired t-test
+
+Above, we used an independent sample t-test to look at the difference between exam 1 and exam 2 scores. This isn't quite how we should approach this, though. Remember, each student took both exams, so this is actually a paired t-test, since the scores on each exam are paired according to which student took them. We can do a paired t-test by adding an argument `paired = TRUE` to the `t.test` function.
+
+```{r, echo = TRUE}
+t.test(exam_scores$exam1, exam_scores$exam2, paired = TRUE)
+```
 
 ## Exercises
 

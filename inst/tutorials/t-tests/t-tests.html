@@ -193,8 +193,59 @@ t.test(exam_scores$exam1, mu = 80, alternative = &quot;greater&quot;)</code></pr
 ##  20.09062</code></pre>
 <p>If you’re just making a confidence interval, you can ignore the rest of the information. Here, I ran <code>t.test()</code> without anything for <code>mu</code> – this gave me a test comparing it to 0, but I don’t need that information since all I need is the confidence interval.</p>
 </div>
-<div id="section-independent-samples-t-test" class="section level2">
-<h2>Independent Samples t-test</h2>
+<div id="section-two-sample-t-tests" class="section level2">
+<h2>Two Sample t-tests</h2>
+<div id="section-independent-samples-t-test" class="section level3">
+<h3>Independent Samples t-test</h3>
+<p>Doing an independent samples t-test can be done one of two ways. If you have the data from the two samples in two vectors, you can simply use those vectors to run the t-test. In a data frame, this would mean that the two samples are stored as two separate columns.</p>
+<p>If we wanted to run a t-test to see if there was as signficant difference between exam 1 and exam 2, then we could use the following code.</p>
+<pre class="r"><code>t.test(exam_scores$exam1, exam_scores$exam2)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  exam_scores$exam1 and exam_scores$exam2
+## t = -3.0454, df = 167.93, p-value = 0.002699
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -6.263375 -1.336625
+## sample estimates:
+## mean of x mean of y 
+##  82.16667  85.96667</code></pre>
+</div>
+<div id="section-section" class="section level3">
+<h3></h3>
+<p>What if the data were stored in a way such that all the values were in one column, with the corresponding groups in another column? That is, for example, what if we wanted to do an independent samples t-test for exams scores of students who took notes by paper compared to students who took notes by computer?</p>
+<p>We can use formula notation in this case.</p>
+<pre class="r"><code>t.test(exam1 ~ note_mode, data = exam_scores)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  exam1 by note_mode
+## t = 5.4002, df = 86.514, p-value = 5.764e-07
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   5.855666 12.677667
+## sample estimates:
+## mean in group 1 mean in group 2 
+##        86.80000        77.53333</code></pre>
+<p>On the left of the tilde (<code>~</code>), we have the numerical variable that we want to use the mean of. On the right side, we put the categorical variable that denotes which person is in which group. The <code>data = exam_scores</code> argument, as before, denotes which data to pull these columns from.</p>
+</div>
+<div id="section-paired-t-test" class="section level3">
+<h3>Paired t-test</h3>
+<p>Above, we used an independent sample t-test to look at the difference between exam 1 and exam 2 scores. This isn’t quite how we should approach this, though. Remember, each student took both exams, so this is actually a paired t-test, since the scores on each exam are paired according to which student took them. We can do a paired t-test by adding an argument <code>paired = TRUE</code> to the <code>t.test</code> function.</p>
+<pre class="r"><code>t.test(exam_scores$exam1, exam_scores$exam2, paired = TRUE)</code></pre>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  exam_scores$exam1 and exam_scores$exam2
+## t = -3.6655, df = 89, p-value = 0.0004192
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.859862 -1.740138
+## sample estimates:
+## mean of the differences 
+##                    -3.8</code></pre>
+</div>
 </div>
 <div id="section-exercises" class="section level2">
 <h2>Exercises</h2>
@@ -457,11 +508,11 @@ learnr:::store_exercise_cache("exercise3", list(chunks = list(list(label = "exer
  
 <script type="application/shiny-prerendered" data-context="server">
 learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "exercise4", question = structure("What would be the conclusion from this hypothesis test?", html = TRUE, class = c("html", 
-"character")), answers = list(structure(list(id = "lnr_ans_9b20235", 
+"character")), answers = list(structure(list(id = "lnr_ans_44fc58b", 
     option = "Fail to reject the null hypothesis.", value = "Fail to reject the null hypothesis.", 
     label = structure("Fail to reject the null hypothesis.", html = TRUE, class = c("html", 
     "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer", 
-"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5538f84", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6b2a3cd", 
     option = "Reject the null hypothesis.", value = "Reject the null hypothesis.", 
     label = structure("Reject the null hypothesis.", html = TRUE, class = c("html", 
     "character")), correct = TRUE, message = structure("Good job!", html = TRUE, class = c("html", 
@@ -474,7 +525,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label 
 "character")), message = NULL, post_message = NULL), ids = list(
     answer = "exercise4-answer", question = "exercise4"), loading = structure("<strong>Loading:<\u002fstrong> \nWhat would be the conclusion from this hypothesis test?\n<br/><br/><br/>", html = TRUE, class = c("html", 
 "character")), random_answer_order = TRUE, allow_retry = TRUE, 
-    seed = 445184681.792695, options = list()), class = c("learnr_radio", 
+    seed = 979288803.543983, options = list()), class = c("learnr_radio", 
 "tutorial_question")))
 </script>
  
