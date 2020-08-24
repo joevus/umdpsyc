@@ -1,5 +1,5 @@
 ---
-title: "Descriptive Statistics for Numerical Variables"
+title: "Numerical Descriptive Statistics"
 output: 
   learnr::tutorial:
     progressive: true
@@ -39,6 +39,7 @@ In the examples for this tutorial, we will use the exam scores dataset.
 head(exam_scores)
 ```
 
+This is a fictional dataset, created for the purposes of the tutorials provided in the `umdpsyc` package, but are based on real studies and real results. It contains data about exam scores as well as variables that might be associated with exam scores, such as anxiety levels, method of note-taking, and amount of sleep that the student got before taking the exam.
 
 ## Measures of Center and Spread
 
@@ -55,12 +56,27 @@ Many of the functions for getting numerical summaries of center and spread are i
 | `IQR(x)` | Finds the IQR of a vector `x`|
 | `summary(x)` | Finds the min, 1st quartile, median, mean, 3rd quartile and max of a vector `x`, or of each column in a data frame `x`|
 
-In general, these are used on a vector, rather than a data frame, so you'll need to be careful to specify the correct column within the data frame.
+In general, these are used on a vector, rather than a data frame, so you'll need to be careful to specify the correct column within the data frame. Remember that you can use `$` notation to extract a specific column from the data frame.
 
 ```{r, echo=TRUE}
 mean(exam_scores$exam1)
+sd(exam_scores$exam1)
 ```
 
+### Practice Problem
+
+How would you find the median of the exam 2 scores?
+
+```{r practice1, exercise=TRUE}
+
+```
+
+```{r practice1-check}
+grade_result(
+  pass_if(~ identical(.result, median(exam_scores$exam2)), "Good Job!"),
+  fail_if(~ TRUE)
+)
+```
 
 ## Plotting with base R
 
@@ -77,13 +93,13 @@ The basic functions for plotting numerical variables in `R` are shown in the tab
 For example, to get a simple histogram, we can use the following command.
 
 ```{r}
-hist(mtcars$hp) 
+hist(exam_scores$exam1) 
 ```
 
 We can make adjustments to this graph by adding additional **arguments** to the `hist` function. Arguments are the inputs that we provide a function. Above, we only provided one argument: the data to be plotted. We can also specify that we want a different number of bins, for example.
 
 ```{r}
-hist(mtcars$hp, breaks = 20) # The "breaks = 20" argument sets the number of bins
+hist(exam_scores$exam1, breaks = 20) # The "breaks = 20" argument sets the number of bins
 ```
 
 ### Boxplots
@@ -91,8 +107,19 @@ hist(mtcars$hp, breaks = 20) # The "breaks = 20" argument sets the number of bin
 We can make boxplots using the `boxplots` function.
 
 ```{r}
-boxplot(mtcars$hp)
+boxplot(exam_scores$exam1)
 ```
+
+### Customizing Plots
+
+Notice that these are very bare-bones plots, without titles or axes labels in some cases. Let's add a simple title to the boxplot above. We can do this using the `main` argument. 
+
+```{r}
+boxplot(exam_scores$exam1, main = "Scores on Exam 1")
+```
+
+Note that the quotations around the text you want to add as the title are very crucial! The `main` argument takes in a string as the input, so you need to provide it a string variable.
+
 
 ## Plotting with `qplot`
 
@@ -147,6 +174,13 @@ If we want to make a scatterplot, we can use it very similar to how we would use
 qplot(exam1, exam2, data = exam_scores)
 ```
 
+### Adding a title
+
+We can add a title like we did before using the `main` argument.
+
+```{r, echo = TRUE}
+qplot(exam1, exam2, data = exam_scores, main = "Scatterplot of scores on two exams")
+```
 
 ## Exercises
 

@@ -147,15 +147,13 @@ qplot(factor(note_mode), data = exam_scores)
 Recall that we used `qplot` for boxplots, and used `y=` to specify the numerical variables. We can use the `x=` argument to specify which group to split on. 
 
 ```{r, echo = TRUE}
-qplot(x = factor(exam_scores$note_mode), y = exam_scores$exam1, geom = 'boxplot')
+qplot(x = factor(note_mode), y = exam1, geom = 'boxplot', data=exam_scores)
 
 ```
 
 Note that we had to use `factor` to change `exam_scores$note_mode` into a `factor` object, so that R knows that it is a categorical variable. Otherwise, it will think it is numerical (since it is coded as `1` or `2`), which is not what we want!
 
 ## Exercises
-
-
 
 ### Exercise 1
 
@@ -183,6 +181,7 @@ What if we wanted to look at the information presented above in a bar plot, usin
 ```{r exercise2-check}
 grade_result(
   pass_if(~ identical(.result, qplot(factor(anxiety), data = exam_scores)), "Good Job!"),
+  pass_if(~ identical(.result, qplot(factor(exam_scores$anxiety))), "Good Job!"),
   fail_if(~ TRUE)
 )
 ```
@@ -197,6 +196,7 @@ Suppose we wanted to look at boxplots of scores on exam 2 split by low, medium, 
 
 ```{r exercise3-check}
 grade_result(
+  pass_if(~ identical(.result, qplot(x = factor(anxiety), y = exam2, geom = 'boxplot', data=exam_scores)), "Good Job!"),
   pass_if(~ identical(.result, qplot(x = factor(exam_scores$anxiety), y = exam_scores$exam2, geom = 'boxplot')), "Good Job!"),
   fail_if(~ TRUE)
 )

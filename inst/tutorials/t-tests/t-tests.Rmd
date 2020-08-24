@@ -23,11 +23,18 @@ learnr::tutorial_options(
 
 ## Hypothesis Tests
 
+One of the basic inferential analyses you can do with data is a hypothesis test. R is very helpful for performing t-tests, with built-in functions allowing you run a variety of different types of tests, including one sample and two sample tests, with ease.
+
+We will be using the `exam_scores` dataset in this tutorial to look at how to use R to do some basic t-tests. 
+
 ```{r}
 data("exam_scores")
+head(exam_scores)
 ```
 
-The steps to a hypothesis are:
+### 
+
+As a reminder, the steps to a hypothesis are:
 
 1) State your hypotheses.
 
@@ -39,15 +46,17 @@ The steps to a hypothesis are:
 
 5) Evaluate and interpret.
 
-Most of these steps will be done outside of R, and in fact, they can generally only be done outside of R. However, R can be very useful for the computational part, step 4. 
-
-In this tutorial, we will use R to calculate the test statistic as part of performing a t-test.
+Most of these steps will be done outside of R, and in fact, they can generally only be done outside of R. However, R can be very useful for the computational part, step 4. We won't go over every single step here and focus mostly on the R part, so remember to keep in mind that the code is only one small portion of the hypothesis testing process.
 
 ## Hypothesis Test Setup
 
-$$H_0: \mu = 80 $$
-$$H_A: \mu \ne 80$$
+Suppose a professor tried to calibrate an exam so that it had an 80 average grade, and they want to know whether mean of all students who would take the exam would be 80. Assuming that the 90 students in the `exam_scores` dataset are an independent and random sample, how might the professor test whether the exam was calibrated correctly (that is, the mean is 80).
 
+The hypotheses would look like this.
+
+$$H_0: \mu = 80 $$
+$$H_1: \mu \ne 80$$
+In the examples in this tutorial, we will use an alpha level of 0.05. In general, the R code won't change depending on the alpha level that you decide, though the code will change if you want different confidence levels for confidence intervals.
 
 ## Using `t.test()`
 
@@ -58,6 +67,10 @@ Let's look at doing a simple two-sided test, with a null hypothesis that $\mu = 
 ```{r, echo = TRUE}
 t.test(exam_scores$exam1, mu = 80)
 ```
+
+The output provides the test statistic, degrees of freedom, and the p-value in the top line. In this case, our p-value was 0.03033, so we would reject the null hypothesis (remember, our alpha level was 0.05). Below, we get a few more pieces of information, such as the actual sample mean.
+
+###
 
 By default, this does a two-sided test. What if we wanted to do a one-sided test? We can use the `alternative` argument to change it.
 
@@ -74,7 +87,7 @@ Note that this doesn't provide the conclusion of the test for you. You need to m
 Lastly, notice that the output gives you information about the confidence interval. You can use the `t.test()` function to create confidence intervals as well. Just make sure you use the `conf.level` argument to specify the type of confidence interval you want.
 
 ```{r, echo = TRUE}
-t.test(mtcars$mpg, conf.level = 0.99)
+t.test(exam_scores$exam1, conf.level = 0.99)
 ```
 
 If you're just making a confidence interval, you can ignore the rest of the information. Here, I ran `t.test()` without anything for `mu` -- this gave me a test comparing it to 0, but I don't need that information since all I need is the confidence interval. 
@@ -115,51 +128,42 @@ t.test(exam_scores$exam1, exam_scores$exam2, paired = TRUE)
 
 ### Exercise 1
 
-Consider the `exam_scores` data that is included in the `umdpsyc` package. 
-
-```{r exercises-setup}
-data(exam_scores)
-```
-
-```{r exercise1-structure, echo = TRUE, exercise = TRUE}
-str(exam_scores)
-```
-
-Suppose you are interested in whether there is a relationship between the method of note-taking and the score on exam 1. That is, in words, your null hypothesis is that the mean score on exam 1 for students who took notes by paper is the same as the mean score on exam 1 for students who took notes by computer. Your alternative hypothesis is that they are not the same. You use a two-sided test, and set an alpha level of 0.05. 
-
-How would you run the test in R?
+The professor designed exam 2 to be a little bit easier, and expects the average grade for students taking the exam to be 85. However, the professor is worried that the exam might be too easy and wants to see if the average grade on the exam would be higher. Is the mean scores on exam 2 signficantly greater than 85? Use an alpha level of 0.05 and perform the test using R.
 
 ```{r exercise1, echo = TRUE, exercise = TRUE}
 
 ```
 
-
 ```{r exercise1-check}
 grade_result(
-  pass_if(~ identical(.result, t.test(exam1 ~ note_mode, data = exam_scores)), "Good job!"),
+  pass_if(~ identical(.result, t.test(exam_scores$exam2, mu = 85, alternative = 'greater')), "Good job!"),
   fail_if(~ TRUE, "Not quite. Try again.")
 )
-
 ```
+
 ### Exercise 2
 
-
-
-```{r exercise2, echo = TRUE, exercise = TRUE}
-
+```{r exercise2}
+learnr::question("What would be the conclusion from the hypothesis test in Exercise 1?",
+         answer("Reject the null hypothesis.", correct=FALSE),
+         answer("Fail to reject the null hypothesis.", correct = TRUE,  message = "Good job!"),
+         allow_retry = TRUE,
+         random_answer_order = TRUE
+)
 ```
 
 ### Exercise 3
 
-How would you subset the dataset to only include people who took notes by paper? 
+Suppose you are interested in whether there is a relationship between the method of note-taking and the score on exam 2. That is, in words, your null hypothesis is that the mean score on exam 2 for students who took notes by paper is the same as the mean score on exam 2 for students who took notes by computer. Your alternative hypothesis is that they are not the same. Use an alpha level of 0.05 and perform the test using R.
 
 ```{r exercise3, echo = TRUE, exercise = TRUE}
 
 ```
 
+
 ```{r exercise3-check}
 grade_result(
-  pass_if(~ identical(.result, exam_scores[exam_scores$note_mode == 1,]), "Good job!"),
+  pass_if(~ identical(.result, t.test(exam2 ~ note_mode, data = exam_scores)), "Good job!"),
   fail_if(~ TRUE, "Not quite. Try again.")
 )
 
@@ -168,7 +172,7 @@ grade_result(
 ### Exercise 4
 
 ```{r exercise4}
-learnr::question("What would be the conclusion from this hypothesis test?",
+learnr::question("What would be the conclusion from the hypothesis test in Exercise 3?",
          answer("Fail to reject the null hypothesis.", correct=FALSE),
          answer("Reject the null hypothesis.", correct = TRUE,  message = "Good job!"),
          allow_retry = TRUE,
