@@ -160,5 +160,6 @@ submission_code <- function(UID, exercise = 'data-frames'){
 
 Generate your submission code by putting in your UID in the function below. For example, if your UID is `2`, then your code should look like `submission_code(UID = 2)`
 ```{r submission, exercise = TRUE}
-submission_code(UID = )
+# Replace the number below with your UID
+submission_code(2)
 ```
