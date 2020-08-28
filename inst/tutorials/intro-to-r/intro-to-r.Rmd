@@ -278,7 +278,7 @@ grade_result(
 ### Submitting work
 
 ```{r submission-setup}
-submission_code <- function(UID, exercise = 'data-frames'){
+submission_code <- function(UID){
   httr::sha1_hash('intror',as.character(UID))
 }
 ```

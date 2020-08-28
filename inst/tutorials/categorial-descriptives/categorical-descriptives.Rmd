@@ -217,7 +217,7 @@ learnr::question("Based on the graph in Exercise 3, which level of anxiety would
 ### Submitting work
 
 ```{r submission-setup}
-submission_code <- function(UID, exercise = 'data-frames'){
+submission_code <- function(UID){
   httr::sha1_hash('catdesc11',as.character(UID))
 }
 ```

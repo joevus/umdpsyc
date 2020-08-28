@@ -155,7 +155,7 @@ learnr::question("Looking at the p-values, how do they compare?",
 ### Submitting work
 
 ```{r submission-setup}
-submission_code <- function(UID, exercise = 'data-frames'){
+submission_code <- function(UID){
   httr::sha1_hash('anova31',as.character(UID))
 }
 ```
