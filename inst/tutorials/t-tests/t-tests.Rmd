@@ -183,7 +183,7 @@ learnr::question("What would be the conclusion from the hypothesis test in Exerc
 ### Submitting work
 
 ```{r submission-setup}
-submission_code <- function(UID, exercise = 'data-frames'){
+submission_code <- function(UID){
   httr::sha1_hash('ttest123',as.character(UID))
 }
 ```
