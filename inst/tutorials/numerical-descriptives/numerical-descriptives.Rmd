@@ -237,6 +237,7 @@ Create a histogram of the exam 1 scores for all students who used a computer as 
 ```{r exercise3-check}
 grade_result(
   pass_if(~ identical(.result, hist(exam_scores[exam_scores$note_mode == 2,'exam1'], breaks = 15)), "Good Job!"),
+  pass_if(~ identical(.result, hist(exam_scores$exam1[exam_scores$note_mode == 2], breaks = 15)), "Good Job!"),
   # pass_if(~ isTRUE(all.equal(.result, qplot(exam_scores[exam_scores$note_mode == 2,'exam1'], bins = 15))), "Good Job!"),
   fail_if(~ TRUE)
 )
