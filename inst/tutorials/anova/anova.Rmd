@@ -139,7 +139,8 @@ grade_result(
 Note that `note_mode` has two categories. What if you had decided to simply run a two-sided independent samples t-test for the difference in mean exam score between the paper note-taking group and the computer note-taking group? Complete the code and run the t-test below, which includes an argument `var.equal = TRUE` to include an equal variances assumptions (recall that ANOVA has an equal variances assumption).
 
 ```{r exercise3, exercise=TRUE}
-t.test( ~ , data = exam_scores, var.equal = TRUE)
+# Uncomment the below code by removing the "#" and complete it.
+# t.test( ~ , data = exam_scores, var.equal = TRUE)
 ```
 
 ```{r exercise3-question}
