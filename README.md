@@ -1,1 +1,1 @@
-# UMD PSYC R Learning Package
+# UMD PSYC R Learning Tutorials
