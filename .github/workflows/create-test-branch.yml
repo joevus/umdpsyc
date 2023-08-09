@@ -1,11 +1,11 @@
-name: New Production Branch
-run-name: ${{ github.actor }} is replacing production branch with new production branch 🚀
+name: New Test Branch
+run-name: ${{ github.actor }} is replacing test branch with new test branch 🚀
 on:
   push:
     branches:
       - main
 jobs:
-  Recreate-Production-Branch:
+  Recreate-Test-Branch:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
@@ -18,8 +18,8 @@ jobs:
             git config --global user.email "joehoskisson@gmail.com"
             git config --global user.name "Joe Hoskisson"
       - run: echo " The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "Create new production branch"
-      - run: git checkout -b production
+      - run: echo "Create new test branch"
+      - run: git checkout -b test
       - run: echo "Removing all files except those that start with '.' and those"
       - run: echo "that are in the _site directory and _site.yml"
       - run: find . -not -path "./.*" -a -not -path "./_site*" -delete
@@ -28,7 +28,7 @@ jobs:
       - run: mv _site/* .
       - run: rm -r _site
       - run: git add .
-      - run: git commit -m "build production branch"
-      - name: force replacement of production branch in remote repository
-        run: git push origin production --force
+      - run: git commit -m "build test branch"
+      - name: force replacement of test branch in remote repository
+        run: git push origin test --force
       - run: echo " This job's status is ${{job.status}}."
